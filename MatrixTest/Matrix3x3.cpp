@@ -55,10 +55,17 @@ void Matrix3x3::Transpose()
 
 Matrix3x3 Matrix3x3::Rotate(float radian)
 {
+	/*
 	Matrix3x3 identity = Identity();
 	identity.c[0] = Vector3(cosf(radian), sinf(radian), 0);
 	identity.c[1] = Vector3(-sinf(radian), cosf(radian), 0);
-	return identity.GetTranspose();
+	return identity;*/
+	Matrix3x3 identity = Identity();
+	identity.mm[0][0] = cosf(radian);
+	identity.mm[0][1] = sinf(radian);
+	identity.mm[1][0] = -sinf(radian);
+	identity.mm[1][1] = cosf(radian);
+	return identity;
 }
 
 Matrix3x3 Matrix3x3::Scale(const Vector3 & scale)
@@ -72,8 +79,8 @@ Matrix3x3 Matrix3x3::Scale(const Vector3 & scale)
 Matrix3x3 Matrix3x3::Translate(const Vector3 & translation)
 {
 	Matrix3x3 identity = Identity();
-	identity.mm[0][1] = translation.x;
-	identity.mm[1][2] = translation.y;
+	identity.mm[2][0] = translation.x;
+	identity.mm[2][1] = translation.y;
 	return identity;
 }
 
