@@ -36,13 +36,18 @@ int main()
 		if (sfw::getKey('E')) angle -= sfw::getDeltaTime() * angularSpeed;
 
 		Matrix3x3 augoo;
+
+		for (int i = 0; i < 9; ++i)
+		{
+			augoo.v[i] = i;
+		}
 		//augoo.v[0] = 0;
 		//augoo.v[1] = 1;
 		//augoo.v[2] = 2;
 
-		augoo.mm[0][0] = 0;
-		augoo.mm[0][1] = 1;
-		augoo.mm[0][2] = 2;
+		//augoo.mm[0][0] = 0;
+		//augoo.mm[0][1] = 1;
+		//augoo.mm[0][2] = 2;
 
 
 		for (int i = 1; i < 10; ++i)
@@ -56,9 +61,9 @@ int main()
 		}
 
 
-		Matrix3x3 mat = Matrix3x3::Translate({ x,y,0 })
-			* Matrix3x3::Scale(Vector3(10,10,10))
-			* Matrix3x3::Rotate(angle);
+		Matrix3x3 mat = Matrix3x3::Translate({ 4,5,0 });
+			//* Matrix3x3::Scale(Vector3(10,10,10))
+			//* Matrix3x3::Rotate(angle);
 
 		/*for (int i = 0; i < 9; ++i)
 		{
