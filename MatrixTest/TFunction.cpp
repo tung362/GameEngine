@@ -99,14 +99,14 @@ CollisionData ITest_SAT(const ConvexHull &a, ConvexHull &b)
 	}
 }*/
 
-/*Matrix4x4 Matrix3ToMatrix4(Matrix3x3 m)
+Matrix4x4 Matrix3ToMatrix4(Matrix3x3 m)
 {
-	Matrix4x4 newMatrix4x4(m.mm[0][0], m.mm[1][0], 0, m.mm[2][0],
-						   m.mm[0][1], m.mm[1][1], 0, m.mm[2][1],
+	Matrix4x4 newMatrix4x4(m.mm[0][0], m.mm[0][1], 0, m.mm[0][2],
+						   m.mm[1][0], m.mm[1][1], 0, m.mm[1][2],
 									0,			0, 1,		   0,
-						   m.mm[0][2], m.mm[1][2], 0, m.mm[2][2]);
+						   m.mm[2][0], m.mm[2][1], 0, m.mm[2][2]);
 	return newMatrix4x4;
-}*/
+}
 
 Matrix4x4 Matrix3ToMatrix4(float *v)
 {
