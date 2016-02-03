@@ -213,18 +213,15 @@ Matrix3x3 Matrix3x3::operator-(const Matrix3x3 & otherMatrix) const
 
 Matrix3x3 Matrix3x3::operator*(const Matrix3x3 & otherMatrix) const
 {
-	return Matrix3x3{
-		mm[0][0] * otherMatrix.mm[0][0] + mm[0][1] * otherMatrix.mm[1][0] + mm[0][2] * otherMatrix.mm[2][0],
-		mm[0][0] * otherMatrix.mm[0][1] + mm[0][1] * otherMatrix.mm[1][1] + mm[0][2] * otherMatrix.mm[2][1],
-		mm[0][0] * otherMatrix.mm[0][2] + mm[0][1] * otherMatrix.mm[1][2] + mm[0][2] * otherMatrix.mm[2][2],
-
-		mm[1][0] * otherMatrix.mm[0][0] + mm[1][1] * otherMatrix.mm[1][0] + mm[1][2] * otherMatrix.mm[2][0],
-		mm[1][0] * otherMatrix.mm[0][1] + mm[1][1] * otherMatrix.mm[1][1] + mm[1][2] * otherMatrix.mm[2][1],
-		mm[1][0] * otherMatrix.mm[0][2] + mm[1][1] * otherMatrix.mm[1][2] + mm[1][2] * otherMatrix.mm[2][2],
-
-		mm[2][0] * otherMatrix.mm[0][0] + mm[2][1] * otherMatrix.mm[1][0] + mm[2][2] * otherMatrix.mm[2][0],
-		mm[2][0] * otherMatrix.mm[0][1] + mm[2][1] * otherMatrix.mm[1][1] + mm[2][2] * otherMatrix.mm[2][1],
-		mm[2][0] * otherMatrix.mm[0][2] + mm[2][1] * otherMatrix.mm[1][2] + mm[2][2] * otherMatrix.mm[2][2] };
+	Matrix3x3 temp;
+	for (int col = 0; col < 3; ++col)
+	{
+		for (int row = 0; row < 3; ++row)
+		{
+			for (int inner = 0; inner < 3; ++inner) temp.mm[row][col] += mm[row][inner] * otherMatrix.mm[inner][col];
+		}
+	}
+	return temp;
 }
 
 void Matrix3x3::operator=(const Matrix3x3 & otherMatrix)

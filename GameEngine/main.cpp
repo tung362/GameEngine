@@ -22,7 +22,7 @@ int main()
 	sfw::initContext();
 	int  handle = sfw::loadTextureMap("./Textures/dino.png");
 
-	float x = 400, y = 400;
+	float x = 4, y = 5;
 	float angle = 0;
 	float speed = 100;
 	float angularSpeed = 15;
@@ -61,8 +61,8 @@ int main()
 		}
 
 
-		Matrix3x3 mat = Matrix3x3::Translate({ 4,5,0 });
-			//* Matrix3x3::Scale(Vector3(10,10,10))
+		Matrix3x3 mat = Matrix3x3::Scale(Vector3(100, 100, 10)) * Matrix3x3::Translate({ x,y,0 });
+						;
 			//* Matrix3x3::Rotate(angle);
 
 		/*for (int i = 0; i < 9; ++i)
@@ -79,7 +79,7 @@ int main()
 		cout << endl << endl;
 		for (int i = 1; i < 17; ++i)
 		{
-			cout << Matrix3ToMatrix4(mat.v).m[i] << ",";
+			cout << Matrix3ToMatrix4(mat.v).m[i-1] << ",";
 			if (i % 4 == 0) cout << endl;
 		}
 
