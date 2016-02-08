@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <list>
 #define PI 3.14159265359
 #define FTL_EPSILON 0.0001f
 
@@ -24,6 +25,7 @@ public:
 	Vector3 Normal();
 	Vector3 Reflect(Vector3 normal);
 	float GetAngle2D();
+	static Vector3 SetAngle(float angle);
 
 	void operator-();
 	void operator=(Vector3 otherVec);
@@ -100,9 +102,10 @@ public:
 			  float r0c3, float r1c3, float r2c3, float r3c3);
 };
 
-/*class Transform
+class Transform
 {
 	Transform *parent;
+	std::list<Transform*> children;
 	Vector3 position;
 	Vector3 Scale;
 	float angle;
@@ -110,18 +113,20 @@ public:
 public:
 	Transform();
 	~Transform();
-	void SetParent(Transform * newParent);
 	Matrix3x3 GetGlobalTransform() const;
-	void SetLocalTransform(Matrix3x3 &);
 
+	void SetParent(Transform * newParent);
 	void SetPosition(const Vector3 & newPosition);
 	void SetScale(const Vector3 & newScale);
 	void SetAngle(float newAngle);
 
-	Vector3 GetPosition();
-	Vector3 GetScale();
-	float GetAngle();
-};*/
+	Vector3 GetPosition() const;
+	Vector3 GetScale() const;
+	float GetAngle() const;
+
+	Vector3 GetRight() const;
+	Vector3 GetUp() const;
+};
 
 struct AABB
 {
@@ -213,8 +218,8 @@ float Clamp(float min, float max, float value);*/
 
 
 //
-Matrix4x4 Matrix3ToMatrix4(Matrix3x3 m);
-Matrix4x4 Matrix3ToMatrix4(float *v);
+Matrix4x4 Matrix3ToMatrix4(Matrix3x3 m, float Z);
+Matrix4x4 Matrix3ToMatrix4(float *v, float Z);
 float Distance(Vector3 vec1, Vector3 vec2);
 float DotPro(Vector3 vec, Vector3 otherVec);
 Vector3 ILerp(Vector3 start, Vector3 target, float percentage);

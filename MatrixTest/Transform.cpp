@@ -1,11 +1,12 @@
 #include <iostream>
 #include <cstring>
+#include <list>
 #include "TNL.h"
 
 using std::cout;
 using std::endl;
 
-/*Transform::Transform()
+Transform::Transform()
 {
 	parent = nullptr;
 	Scale = Vector3(1, 1, 0);
@@ -15,25 +16,27 @@ using std::endl;
 
 Transform::~Transform()
 {
-	//for each(Transform *child in )
-}
-
-void Transform::SetLocalTransform(Matrix3x3 &)
-{
+	auto t = children;
+	for each(Transform *child in t) child->SetParent(parent);
+	SetParent(nullptr);
 }
 
 Matrix3x3 Transform::GetGlobalTransform() const
 {
-	(parent ? parent->GetGlobalTransform() :
-		Matrix3x3::Identity())
-		* Matrix3x3::Translate(position)
-		* Matrix3x3::Scale(Scale)
-		* Matrix3x3::Rotate(angle);
+	return
+		Matrix3x3::Scale(Scale)
+		* Matrix3x3::Rotate(angle)
+		* Matrix3x3::Translate(position) 
+	* (parent ? parent->GetGlobalTransform() 
+		: Matrix3x3::Identity());
 }
 
 void Transform::SetParent(Transform * newParent)
 {
-	if(parent)
+	if (parent) parent->children.remove(this);
+
+	if (newParent) newParent->children.push_front(this);
+
 	parent = newParent;
 }
 
@@ -52,17 +55,27 @@ void Transform::SetAngle(float newAngle)
 	angle = newAngle;
 }
 
-Vector3 Transform::GetPosition()
+Vector3 Transform::GetPosition() const
 {
 	return position;
 }
 
-Vector3 Transform::GetScale()
+Vector3 Transform::GetScale() const
 {
 	return Scale;
 }
 
-float Transform::GetAngle()
+float Transform::GetAngle() const
 {
 	return angle;
-}*/
+}
+
+Vector3 Transform::GetRight() const
+{
+	return Vector3::SetAngle(angle);
+}
+
+Vector3 Transform::GetUp() const
+{
+	return Vector3::SetAngle(angle).Normal();
+}

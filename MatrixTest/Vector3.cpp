@@ -60,6 +60,11 @@ float Vector3::GetAngle2D()
 	return (radians / PI) * 180;
 }
 
+Vector3 Vector3::SetAngle(float angle)
+{
+	return Vector3(cosf(angle), sinf(angle), 0);
+}
+
 void Vector3::operator-()
 {
 	x = -x;
