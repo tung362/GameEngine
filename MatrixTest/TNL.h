@@ -27,7 +27,6 @@ public:
 	float GetAngle2D();
 	static Vector3 SetAngle(float angle);
 
-	void operator-();
 	void operator=(Vector3 otherVec);
 	Vector3 operator+(Vector3 otherVec);
 	Vector3 operator-(Vector3 otherVec);
@@ -43,6 +42,7 @@ public:
 	bool operator!=(Vector3 otherVec);
 };
 Vector3 operator*(float otherNum, Vector3 vec);
+Vector3 operator-(Vector3 vec);
 void operator*=(float otherNum, Vector3 vec);
 
 //Translation * Rotation * Scale
@@ -84,7 +84,6 @@ public:
 	void operator -=(const Matrix3x3& otherMatrix);
 	void operator *=(const Matrix3x3& otherMatrix);
 };
-
 Vector3 operator*(const Matrix3x3 &_A, const Vector3 &b);
 
 struct Matrix4x4
@@ -102,7 +101,7 @@ public:
 			  float r0c3, float r1c3, float r2c3, float r3c3);
 };
 
-class Transform
+struct Transform
 {
 	Transform *parent;
 	std::list<Transform*> children;
@@ -127,6 +126,51 @@ public:
 	Vector3 GetRight() const;
 	Vector3 GetUp() const;
 };
+
+struct Rigidbody
+{
+public:
+	Vector3 gravity;
+	Vector3 velocity;
+	Vector3 acceleration;
+	Vector3 force;
+	Vector3 jerk;
+	float gravityScaler;
+	float mass;
+	float drag;
+	float angularVelocity;
+	float angularAcceleration;
+	float torque;
+	float angularDrag;
+	Rigidbody();
+	void AddForce(const Vector3 & newForce);
+	void AddTorque(float newTorque);
+	void Integrate(Transform * transform, float dt);
+};
+
+/*struct Rigidbody
+{
+public:
+	//Shape *shape
+	Vector3 position;
+	Vector3 gravity;
+	Vector3 velocity;
+	Vector3 force;
+	Vector3 jerk;
+	float acceleration;
+	float mass;
+	float drag;
+	float angularVelocity;
+	float angularAcceleration;
+	float torque;
+	float angularDrag;
+	float orientation;
+
+	Rigidbody();
+	void AddForce(const Vector3 & newForce);
+	void AddTorque(float newTorque);
+	void Integrate(Transform * transform, float dt);
+};*/
 
 struct AABB
 {

@@ -130,12 +130,12 @@ float DotPro(Vector3 vec, Vector3 otherVec)
 
 Vector3 ILerp(Vector3 start, Vector3 target, float percentage)
 {
-	return (target - start) * percentage + start;
+	return start * (1 - percentage) + target * percentage;
 }
 
 float ILerp(float start, float target, float percentage)
 {
-	return (target - start) * percentage + start;
+	return start * (1 - percentage) + target * percentage;
 }
 
 Vector3 CrossProduct(Vector3 a, Vector3 b)

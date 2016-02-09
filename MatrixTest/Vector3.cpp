@@ -65,13 +65,6 @@ Vector3 Vector3::SetAngle(float angle)
 	return Vector3(cosf(angle), sinf(angle), 0);
 }
 
-void Vector3::operator-()
-{
-	x = -x;
-	y = -y;
-	z = -z;
-}
-
 void Vector3::operator=(Vector3 otherVec)
 {
 	x = otherVec.x;
@@ -182,6 +175,15 @@ Vector3 operator*(float otherNum, Vector3 vec)
 	temp.x = vec.x * otherNum;
 	temp.y = vec.y * otherNum;
 	temp.z = vec.z * otherNum;
+	return temp;
+}
+
+Vector3 operator-(Vector3 vec)
+{
+	Vector3 temp;
+	temp.x = -vec.x;
+	temp.y = -vec.y;
+	temp.z = -vec.z;
 	return temp;
 }
 

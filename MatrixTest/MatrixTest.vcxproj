@@ -124,6 +124,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Matrix3x3.cpp" />
     <ClCompile Include="Matrix4x4.cpp" />
+    <ClCompile Include="Rigidbody.cpp" />
     <ClCompile Include="TFunction.cpp" />
     <ClCompile Include="TNLDebug.cpp" />
     <ClCompile Include="Transform.cpp" />

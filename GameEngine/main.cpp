@@ -51,28 +51,46 @@ int main()
 	sfw::initContext();
 	int  handle = sfw::loadTextureMap("./Textures/dino.png");
 
-	Transform transform1;
-	Transform transform2;
-	Transform orbitalSpinner;
-
-	Matrix3x3 mat;
-
-	float x = 1, y = 1;
+	float x = 400, y = 400;
 	float angle = 0;
 	float speed = 100;
 	float angularSpeed = 15;
+	float gravity = 0;
+
+	Transform transform1;
+	Transform transform2;
+	Transform orbitalSpinner;
+	transform1.SetPosition(Vector3(x, y, 0));
+
+	Rigidbody rigidbody1;
+	rigidbody1.drag = 0.5f;
+	rigidbody1.gravity = Vector3(0, -1, 0);
+	rigidbody1.gravityScaler = gravity;
+
+	Matrix3x3 mat;
+
 	while (sfw::stepContext())
 	{
-		if (sfw::getKey('S')) y -= sfw::getDeltaTime()  * speed;
+		/*if (sfw::getKey('S')) y -= sfw::getDeltaTime()  * speed;
 		if (sfw::getKey('W')) y += sfw::getDeltaTime()  * speed;
 		if (sfw::getKey('A')) x -= sfw::getDeltaTime()  * speed;
 		if (sfw::getKey('D')) x += sfw::getDeltaTime()  * speed;
 		if (sfw::getKey('Q')) angle += sfw::getDeltaTime() * angularSpeed;
+		if (sfw::getKey('E')) angle -= sfw::getDeltaTime() * angularSpeed;*/
+
+		if (sfw::getKey('S')) rigidbody1.AddForce(-transform1.GetUp() * speed);
+		if (sfw::getKey('W')) rigidbody1.AddForce(transform1.GetUp() * speed);
+		if (sfw::getKey('A')) rigidbody1.AddForce(-transform1.GetRight() * speed);
+		if (sfw::getKey('D')) rigidbody1.AddForce(transform1.GetRight() * speed);
+		if (sfw::getKey(' ')) rigidbody1.velocity = Vector3(rigidbody1.velocity.x, 100, rigidbody1.velocity.z);
+		if (sfw::getKey('Q')) angle += sfw::getDeltaTime() * angularSpeed;
 		if (sfw::getKey('E')) angle -= sfw::getDeltaTime() * angularSpeed;
 
 		transform1.SetAngle(angle);
-		transform1.SetPosition(Vector3(x, y, 0));
+		//transform1.SetPosition(Vector3(x, y, 0));
 		transform1.SetScale(Vector3(200, 200, 0));
+
+		rigidbody1.Integrate(&transform1, getDeltaTime());
 
 		orbitalSpinner.SetParent(&transform1);
 		orbitalSpinner.SetAngle(-sfw::getTime());
