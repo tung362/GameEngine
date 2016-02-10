@@ -57,7 +57,7 @@ int main()
 	float angularSpeed = 15;
 	float gravity = 0;
 
-	/*Transform transform1;
+	Transform transform1;
 	Transform transform2;
 	Transform orbitalSpinner;
 	transform1.SetPosition(Vector3(x, y, 0));
@@ -65,7 +65,7 @@ int main()
 	Rigidbody rigidbody1;
 	rigidbody1.drag = 0.5f;
 	rigidbody1.gravity = Vector3(0, -1, 0);
-	rigidbody1.gravityScaler = gravity;*/
+	rigidbody1.gravityScaler = gravity;
 
 	Circle acicle;
 	acicle.position = Vector3(x, y, 0);
@@ -86,7 +86,7 @@ int main()
 		if (sfw::getKey('Q')) angle += sfw::getDeltaTime() * angularSpeed;
 		if (sfw::getKey('E')) angle -= sfw::getDeltaTime() * angularSpeed;*/
 
-		/*if (sfw::getKey('S')) rigidbody1.AddForce(-transform1.GetUp() * speed);
+		if (sfw::getKey('S')) rigidbody1.AddForce(-transform1.GetUp() * speed);
 		if (sfw::getKey('W')) rigidbody1.AddForce(transform1.GetUp() * speed);
 		if (sfw::getKey('A')) rigidbody1.AddForce(-transform1.GetRight() * speed);
 		if (sfw::getKey('D')) rigidbody1.AddForce(transform1.GetRight() * speed);
@@ -109,8 +109,8 @@ int main()
 		Matrix4x4 m1 = Matrix3ToMatrix4(transform1.GetGlobalTransform(), 0.25);
 		Matrix4x4 m2 = Matrix3ToMatrix4(transform2.GetGlobalTransform(), 0.1);
 
-		//sfw::drawTextureMatrix(handle, 0, WHITE, m1.m);
-		//sfw::drawTextureMatrix(handle, 0, MAGENTA, m2.m*/
+		sfw::drawTextureMatrix(handle, 0, WHITE, m1.m);
+		sfw::drawTextureMatrix(handle, 0, MAGENTA, m2.m);
 
 		if (sfw::getKey('S')) acicle.position.y -= sfw::getDeltaTime()  * speed;
 		if (sfw::getKey('W')) acicle.position.y += sfw::getDeltaTime()  * speed;
