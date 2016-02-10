@@ -33,27 +33,3 @@ void Rigidbody::Integrate(Transform * transform, float dt)
 
 	force = Vector3(0, 0, 0);
 }
-
-/*Rigidbody::Rigidbody()
-{
-	gravity = Vector3(0, -1, 0); velocity = Vector3(0, 0, 0); force = Vector3(0, 0, 0); jerk = Vector3(0, 0, 0);
-	acceleration = 0; mass = 1; drag = 0; angularVelocity = 0; angularAcceleration = 0; torque = 0; angularDrag = 0;
-}
-
-void Rigidbody::AddForce(const Vector3 & newForce)
-{
-	force = force + newForce;
-}
-
-void Rigidbody::AddTorque(float newTorque)
-{
-	torque = torque + newTorque;
-}
-
-void Rigidbody::Integrate(Transform * transform, float dt)
-{
-	velocity += force * (1.0f / mass + gravity) * dt;
-	angularVelocity += torque * (1.0f / momentOfInertia) * dt;
-	position += velocity * dt;
-	orient += angularVelocity * dt;
-}*/

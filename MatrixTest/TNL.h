@@ -148,47 +148,25 @@ public:
 	void Integrate(Transform * transform, float dt);
 };
 
-/*struct Rigidbody
-{
-public:
-	//Shape *shape
-	Vector3 position;
-	Vector3 gravity;
-	Vector3 velocity;
-	Vector3 force;
-	Vector3 jerk;
-	float acceleration;
-	float mass;
-	float drag;
-	float angularVelocity;
-	float angularAcceleration;
-	float torque;
-	float angularDrag;
-	float orientation;
 
-	Rigidbody();
-	void AddForce(const Vector3 & newForce);
-	void AddTorque(float newTorque);
-	void Integrate(Transform * transform, float dt);
-};*/
-
+//Shapes//
 struct AABB
 {
 public:
+	Vector3 position;
+	Vector3 halfExtents;
 	AABB();
-	Vector3 m_Position;
-	Vector3 m_Dimension;
-	//Vector3 Min(Vector3 *v, size_t n);
-	//Vector3 Max(Vector3 *v, size_t n);
-	Vector3 Position(); //(min + max) / 2
-	Vector3 Dimension(); //max - min
-	void Rotate(float a);
+	Vector3 Min();
+	Vector3 Max();
 };
 
 struct Circle
 {
 public:
-
+	Vector3 position;
+	float radius;
+	Circle();
+	Circle(Vector3 newPosition, float newRadius);
 };
 
 struct Plane
@@ -196,6 +174,8 @@ struct Plane
 public:
 	Vector3 position;
 	Vector3 normal;
+	Plane();
+	Plane(Vector3 newPosition, Vector3 newNormal);
 };
 
 struct Ray
@@ -204,12 +184,8 @@ public:
 	Vector3 position;
 	Vector3 direction;
 	float length;
-};
-
-/*struct CollisionData
-{
-	float PenetrationDepth; //Distance
-	Vector3 CollisionNormal; //Direction
+	Ray();
+	Ray(Vector3 newPosition, Vector3 newDirection, float newLength);
 };
 
 struct ConvexHull
@@ -217,38 +193,35 @@ struct ConvexHull
 	std::vector<Vector3> verts;
 };
 
-ConvexHull operator*(const Matrix3x3 &m, const ConvexHull &a);
-Vector3 operator-(const Vector3 &a, )
-CollisionData ITest_SAT(const ConvexHull &a, ConvexHull &b);*/
-
-//Functions
-
-//
-/*AABB operator*(const Matrix3x3 &m, const AABB &a);
+AABB operator*(const Matrix3x3 &m, const AABB &a);
 Circle operator*(const Matrix3x3 &m, const Circle &a);
 Ray operator*(const Matrix3x3 &m, const Ray &a);
 Plane operator*(const Matrix3x3 &m, const Plane &a);
+ConvexHull operator*(const Matrix3x3 &m, const ConvexHull &a);
+//End Of Shapes//
 
-bool ITest_AABB(const AABB &a, const AABB &b);
-bool ITest_AABB_Circle(const AABB &a, const AABB &b);
-bool ITest_AABB_Plane(const AABB &a, const AABB &b);
-bool ITest_AABB_Ray(const AABB &a, const AABB &b);
-bool ITest_Circle_Circle(const AABB &a, const AABB &b);
-bool ITest_Circle_Plane(const AABB &a, const AABB &b);
-bool ITest_Circle_Ray(const AABB &a, const AABB &b);
-bool ITest_Circle_Plane(const AABB &a, const AABB &b);
+//Collision//
+bool CollisionTest(const AABB &a, const AABB &b);
+bool CollisionTest(const AABB &a, const Circle &b);
+bool CollisionTest(const AABB &a, const Plane &b);
+bool CollisionTest(const AABB &a, const Ray &b);
+bool CollisionTest(const Circle &a, const Circle &b);
+bool CollisionTest(const Circle &a, const Plane &b);
+bool CollisionTest(const Circle &a, const Ray &b);
+bool CollisionTest(const Ray &a, const Plane &b);
 
 Vector3 MTV_AABB(const AABB &a, const AABB &b);
 Vector3 MTV_AABB_Circle(const AABB &a, const AABB &b);
 Vector3 MTV_AABB_Plane(const AABB &a, const AABB &b);
 Vector3 MTV_AABB_Ray(const AABB &a, const AABB &b);
-Vector3 MTV_Circle_Circle(const AABB &a, const AABB &b);
-Vector3 MTV_Circle_Plane(const AABB &a, const AABB &b);
-Vector3 MTV_Circle_Ray(const AABB &a, const AABB &b);
-Vector3 MTV_Circle_Plane(const AABB &a, const AABB &b);
+Vector3 MTV_Circle_Circle(const Circle &a, const AABB &b);
+Vector3 MTV_Circle_Plane(const Circle &a, const AABB &b);
+Vector3 MTV_Circle_Ray(const Circle &a, const AABB &b);
+Vector3 MTV_Ray_Plane(const Ray &a, const Plane &b);
 
 float Point_Plane_Dist(const Vector3 &a, const Plane &b);
 float Ray_Plane_Dist(const Ray &a, const Plane &b);
+//End of Collision//
 
 
 AABB GenAABB(Vector3 pts, size_t dim);
@@ -257,11 +230,11 @@ AABB GenAABB(Vector3 pts, size_t dim);
 AABB Rotate(const AABB &aabb, float a);
 Vector3 Min(Vector3 *v, size_t n);
 Vector3 Max(Vector3 *v, size_t n);
-float Clamp(float min, float max, float value);*/
+float Clamp(float min, float max, float value);
 
 
 
-//
+//Functions
 Matrix4x4 Matrix3ToMatrix4(Matrix3x3 m, float Z);
 Matrix4x4 Matrix3ToMatrix4(float *v, float Z);
 float Distance(Vector3 vec1, Vector3 vec2);
