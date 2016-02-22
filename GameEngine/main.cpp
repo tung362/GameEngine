@@ -121,8 +121,6 @@ int main()
 
 		drawCircle(acicle.position.x, acicle.position.y, acicle.radius);
 		drawCircle(acicle2.position.x, acicle2.position.y, acicle2.radius);
-
-		cout << CollisionTest(acicle, acicle2) << endl;
 	}
 	sfw::termContext();
 

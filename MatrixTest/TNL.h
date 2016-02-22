@@ -11,6 +11,7 @@ struct Circle;
 struct Plane;
 struct Ray;
 
+/*Math Stuff*/
 struct Vector3
 {
 public:
@@ -45,7 +46,6 @@ Vector3 operator*(float otherNum, Vector3 vec);
 Vector3 operator-(Vector3 vec);
 void operator*=(float otherNum, Vector3 vec);
 
-//Translation * Rotation * Scale
 struct Matrix3x3
 {
 public:
@@ -147,9 +147,9 @@ public:
 	void AddTorque(float newTorque);
 	void Integrate(Transform * transform, float dt);
 };
+/*End of Math Stuff*/
 
-
-//Shapes//
+/*Shapes*/
 struct AABB
 {
 public:
@@ -198,43 +198,46 @@ Circle operator*(const Matrix3x3 &m, const Circle &a);
 Ray operator*(const Matrix3x3 &m, const Ray &a);
 Plane operator*(const Matrix3x3 &m, const Plane &a);
 ConvexHull operator*(const Matrix3x3 &m, const ConvexHull &a);
-//End Of Shapes//
+/*End Of Shapes*/
 
-//Collision//
-bool CollisionTest(const AABB &a, const AABB &b);
-bool CollisionTest(const AABB &a, const Circle &b);
-bool CollisionTest(const AABB &a, const Plane &b);
-bool CollisionTest(const AABB &a, const Ray &b);
-bool CollisionTest(const Circle &a, const Circle &b);
-bool CollisionTest(const Circle &a, const Plane &b);
-bool CollisionTest(const Circle &a, const Ray &b);
-bool CollisionTest(const Ray &a, const Plane &b);
+/*Collision*/
+struct CollisionData // Wrapper for Minimum Translation Vector
+{
+	bool     isOverlap;         // Did we collide?
+	float    penetrationDepth;
+	Vector3  collisionNormal;   // CollisionNormal * PenetrationDepth = Minimum Translation Vector, also called the impulse vector, very important! 
+	Vector3  pointOfContact;    // optional.
+};
 
-Vector3 MTV_AABB(const AABB &a, const AABB &b);
-Vector3 MTV_AABB_Circle(const AABB &a, const AABB &b);
-Vector3 MTV_AABB_Plane(const AABB &a, const AABB &b);
-Vector3 MTV_AABB_Ray(const AABB &a, const AABB &b);
-Vector3 MTV_Circle_Circle(const Circle &a, const AABB &b);
-Vector3 MTV_Circle_Plane(const Circle &a, const AABB &b);
-Vector3 MTV_Circle_Ray(const Circle &a, const AABB &b);
-Vector3 MTV_Ray_Plane(const Ray &a, const Plane &b);
+CollisionData CollisionTest(const AABB &a, const AABB &b);
+CollisionData CollisionTest(const AABB &a, const Circle &b);
+CollisionData CollisionTest(const AABB &a, const Plane &b);
+CollisionData CollisionTest(const AABB &a, const Ray &b);
+CollisionData CollisionTest(const Circle &a, const Circle &b);
+CollisionData CollisionTest(const Circle &a, const Plane &b);
+CollisionData CollisionTest(const Circle &a, const Ray &b);
+CollisionData CollisionTest(const Ray &a, const Plane &b);
+
+//Reverse
+CollisionData CollisionTest(const Circle &b, const AABB &a);
+CollisionData CollisionTest(const Plane &b, const AABB &a);
+CollisionData CollisionTest(const Ray &b, const AABB &a);
+CollisionData CollisionTest(const Plane &b, const Circle &a);
+CollisionData CollisionTest(const Ray &b, const Circle &a);
+CollisionData CollisionTest(const Plane &b, const Ray &a);
+
+//Convex Hull
+CollisionData CollisionTest(const ConvexHull &a, const ConvexHull &b);
+CollisionData CollisionTest(const ConvexHull &a, const Circle &b);
+CollisionData CollisionTest(const ConvexHull &a, const Ray &b);
+CollisionData CollisionTest(const ConvexHull &a, const Plane &b);
+CollisionData CollisionTest(const ConvexHull &a, const AABB &b);
 
 float Point_Plane_Dist(const Vector3 &a, const Plane &b);
 float Ray_Plane_Dist(const Ray &a, const Plane &b);
-//End of Collision//
+/*End of Collision*/
 
-
-AABB GenAABB(Vector3 pts, size_t dim);
-//w = h*sin(a) + w*cos(a)
-//h = w*sin(a) + h*cos(a)
-AABB Rotate(const AABB &aabb, float a);
-Vector3 Min(Vector3 *v, size_t n);
-Vector3 Max(Vector3 *v, size_t n);
-float Clamp(float min, float max, float value);
-
-
-
-//Functions
+/*Functions*/
 Matrix4x4 Matrix3ToMatrix4(Matrix3x3 m, float Z);
 Matrix4x4 Matrix3ToMatrix4(float *v, float Z);
 float Distance(Vector3 vec1, Vector3 vec2);
@@ -244,6 +247,7 @@ float ILerp(float start, float target, float percentage);
 Vector3 CrossProduct(Vector3 a, Vector3 b);
 Vector3 SurfaceNormal(Vector3 a, Vector3 b, Vector3 c);
 Vector3 Reflect(Vector3 vec1, Vector3 normal);
+float Clamp(float min, float max, float value);
 
 void DebugVector3();
 void DebugMatrix3x3();

@@ -70,3 +70,10 @@ Vector3 Reflect(Vector3 vec1, Vector3 normal)
 {
 	return -(2 * (DotPro(vec1, normal))) * normal + vec1;
 }
+
+float Clamp(float min, float max, float value)
+{
+	if (value < min) return min;
+	else if (value > max) return max;
+	else return value;
+}
