@@ -74,6 +74,7 @@ void DebugVector3()
 	//Distance
 	assert(Distance(Vector3(2, 0, 0), Vector3(5.5, 0, 0)) == 3.5f);
 }
+
 void DebugMatrix3x3()
 {
 	//Default
@@ -149,6 +150,105 @@ void DebugMatrix3x3()
 	//Translation
 	{
 		Matrix3x3 trix;
-		assert(trix.Translate(Vector3(5, 8, 0)).mm[2][0] == 5 && trix.Translate(Vector3(5, 8, 0)).mm[2][1] == 8);
+		assert(trix.Translate(Vector2(5, 8)).mm[2][0] == 5 && trix.Translate(Vector2(5, 8)).mm[2][1] == 8);
+	}
+}
+
+void DebugMatrix4x4()
+{
+	Matrix4x4 augoo(-4, 0, 0, 0,
+		-1, 2, 0, 0,
+		-4, 4, 4, 0,
+		-1, -9, -1, 1);
+
+	Matrix4x4 test(2, 2, 2, 2,
+		2, 2, 2, 2,
+		2, 2, 2, 2,
+		2, 2, -2, 2);
+
+	Matrix4x4 inversed(-4, 0, 0, 0,
+		-1, 2, 0, 0,
+		-4, 4, 4, 0,
+		-1, -9, -1, 1);
+
+	//Display
+	cout << "Display:" << endl;
+	for (int col = 1; col < 5; ++col)
+	{
+		for (int row = 1; row < 5; ++row)
+		{
+			cout << inversed.mm[col - 1][row - 1] << ",";
+			if (row % 4 == 0) cout << endl;
+		}
+	}
+
+	//Add
+	cout << "Add:" << endl;
+	for (int col = 1; col < 5; ++col)
+	{
+		for (int row = 1; row < 5; ++row)
+		{
+			cout << (augoo + test).mm[col - 1][row - 1] << ",";
+			if (row % 4 == 0) cout << endl;
+		}
+	}
+
+	//Subtract
+	cout << "Subtract:" << endl;
+	for (int col = 1; col < 5; ++col)
+	{
+		for (int row = 1; row < 5; ++row)
+		{
+			cout << (augoo - test).mm[col - 1][row - 1] << ",";
+			if (row % 4 == 0) cout << endl;
+		}
+	}
+
+	//Multiply no edit
+	cout << "Multiply no edit:" << endl;
+	for (int col = 1; col < 5; ++col)
+	{
+		for (int row = 1; row < 5; ++row)
+		{
+			cout << (augoo * test).mm[col - 1][row - 1] << ",";
+			if (row % 4 == 0) cout << endl;
+		}
+	}
+
+	//Multiply edit
+	cout << "Multiply no edit:" << endl;
+	augoo *= test;
+	for (int col = 1; col < 5; ++col)
+	{
+		for (int row = 1; row < 5; ++row)
+		{
+			cout << augoo.mm[col - 1][row - 1] << ",";
+			if (row % 4 == 0) cout << endl;
+		}
+	}
+
+	//Get Inverse
+	cout << "Get Inverse:" << endl;
+	Matrix4x4 augoo2 = inversed.GetInverse();
+
+	for (int col = 1; col < 5; ++col)
+	{
+		for (int row = 1; row < 5; ++row)
+		{
+			cout << augoo2.mm[col - 1][row - 1] << ",";
+			if (row % 4 == 0) cout << endl;
+		}
+	}
+
+	//Inverse
+	cout << "Inverse:" << endl;
+	inversed.Inverse();
+	for (int col = 1; col < 5; ++col)
+	{
+		for (int row = 1; row < 5; ++row)
+		{
+			cout << inversed.mm[col - 1][row - 1] << ",";
+			if (row % 4 == 0) cout << endl;
+		}
 	}
 }

@@ -68,7 +68,7 @@ Matrix3x3 Matrix3x3::Rotate(float radian)
 	return identity;
 }
 
-Matrix3x3 Matrix3x3::Scale(const Vector3 & scale)
+Matrix3x3 Matrix3x3::Scale(const Vector2 & scale)
 {
 	Matrix3x3 identity = Identity();
 	identity.mm[0][0] = scale.x;
@@ -76,7 +76,7 @@ Matrix3x3 Matrix3x3::Scale(const Vector3 & scale)
 	return identity;
 }
 
-Matrix3x3 Matrix3x3::Translate(const Vector3 & translation)
+Matrix3x3 Matrix3x3::Translate(const Vector2 & translation)
 {
 	Matrix3x3 identity = Identity();
 	identity.mm[2][0] = translation.x;

@@ -9,7 +9,7 @@ Ray::Ray()
 {
 }
 
-Ray::Ray(Vector3 newPosition, Vector3 newDirection, float newLength)
+Ray::Ray(Vector2 newPosition, Vector2 newDirection, float newLength)
 {
 	position = newPosition;
 	direction = newDirection;

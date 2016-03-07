@@ -7,11 +7,11 @@ using std::endl;
 
 Rigidbody::Rigidbody()
 {
-	gravity = Vector3(0, -1, 0); velocity = Vector3(0, 0, 0); acceleration = Vector3(0, 0, 0); force = Vector3(0, 0, 0); jerk = Vector3(0, 0, 0);
+	gravity = Vector2(0, -1); velocity = Vector2(0, 0); acceleration = Vector2(0, 0); force = Vector2(0, 0); jerk = Vector2(0, 0);
 	gravityScaler = 1; mass = 1; drag = 0; angularVelocity = 0; angularAcceleration = 0; torque = 0; angularDrag = 0;
 }
 
-void Rigidbody::AddForce(const Vector3 & newForce)
+void Rigidbody::AddForce(const Vector2 & newForce)
 {
 	force = force + newForce;
 }
@@ -31,5 +31,5 @@ void Rigidbody::Integrate(Transform * transform, float dt)
 
 	velocity = velocity - velocity * drag * dt;
 
-	force = Vector3(0, 0, 0);
+	force = Vector2(0, 0);
 }

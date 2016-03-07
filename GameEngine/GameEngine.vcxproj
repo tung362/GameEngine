@@ -124,11 +124,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GameDebug.cpp" />
+    <ClCompile Include="DrawBox.cpp" />
+    <ClCompile Include="DrawPlane.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GameFunction.h" />
     <ClInclude Include="KeycodeInput.h" />
     <ClInclude Include="sfwdraw.h" />
+    <ClInclude Include="Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

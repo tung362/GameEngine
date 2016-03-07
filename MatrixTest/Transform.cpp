@@ -9,8 +9,8 @@ using std::endl;
 Transform::Transform()
 {
 	parent = nullptr;
-	Scale = Vector3(1, 1, 0);
-	position = Vector3(0, 0, 0);
+	Scale = Vector2(1, 1);
+	position = Vector2(0, 0);
 	angle = 0;
 }
 
@@ -40,12 +40,12 @@ void Transform::SetParent(Transform * newParent)
 	parent = newParent;
 }
 
-void Transform::SetPosition(const Vector3 & newPosition)
+void Transform::SetPosition(const Vector2 & newPosition)
 {
 	position = newPosition;
 }
 
-void Transform::SetScale(const Vector3 & newScale)
+void Transform::SetScale(const Vector2 & newScale)
 {
 	Scale = newScale;
 }
@@ -55,12 +55,12 @@ void Transform::SetAngle(float newAngle)
 	angle = newAngle;
 }
 
-Vector3 Transform::GetPosition() const
+Vector2 Transform::GetPosition() const
 {
 	return position;
 }
 
-Vector3 Transform::GetScale() const
+Vector2 Transform::GetScale() const
 {
 	return Scale;
 }
@@ -70,12 +70,12 @@ float Transform::GetAngle() const
 	return angle;
 }
 
-Vector3 Transform::GetRight() const
+Vector2 Transform::GetRight() const
 {
-	return Vector3::SetAngle(angle);
+	return Vector2::SetAngle(angle);
 }
 
-Vector3 Transform::GetUp() const
+Vector2 Transform::GetUp() const
 {
-	return Vector3::SetAngle(angle).Normal();
+	return Vector2::SetAngle(angle).Perp();
 }

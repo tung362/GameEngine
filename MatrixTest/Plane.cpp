@@ -9,7 +9,7 @@ Plane::Plane()
 {
 }
 
-Plane::Plane(Vector3 newPosition, Vector3 newNormal)
+Plane::Plane(Vector2 newPosition, Vector2 newNormal)
 {
 	position = newPosition;
 	normal = newNormal;

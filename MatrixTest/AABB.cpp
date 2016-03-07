@@ -7,14 +7,22 @@ using std::endl;
 
 AABB::AABB()
 {
+	position = Vector2(0, 0);
+	halfExtents = Vector2(1, 1);
 }
 
-Vector3 AABB::Min()
+AABB::AABB(Vector2 newPosition, Vector2 newHalfExtents)
+{
+	position = newPosition;
+	halfExtents = newHalfExtents;
+}
+
+Vector2 AABB::Min()
 {
 	return position - halfExtents;
 }
 
-Vector3 AABB::Max()
+Vector2 AABB::Max()
 {
 	return position + halfExtents;
 }

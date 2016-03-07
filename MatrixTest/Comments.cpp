@@ -60,3 +60,33 @@
 	//system("pause");
 	//return 0;
 //}
+
+/*
+int main()
+{
+sfw::initContext();
+int  handle = sfw::loadTextureMap("./Textures/dino.png");
+
+float x = 4, y = 5;
+float angle = 0;
+float speed = 100;
+float angularSpeed = 15;
+while (sfw::stepContext())
+{
+if (sfw::getKey('S')) y -= sfw::getDeltaTime()  * speed;
+if (sfw::getKey('W')) y += sfw::getDeltaTime()  * speed;
+if (sfw::getKey('A')) x -= sfw::getDeltaTime()  * speed;
+if (sfw::getKey('D')) x += sfw::getDeltaTime()  * speed;
+if (sfw::getKey('Q')) angle += sfw::getDeltaTime() * angularSpeed;
+if (sfw::getKey('E')) angle -= sfw::getDeltaTime() * angularSpeed;
+
+Matrix3x3 mat = Matrix3x3::Scale(Vector3(100, 100, 10)) * Matrix3x3::Rotate(angle) * Matrix3x3::Translate({ x,y,0 });
+Matrix4x4 inMat = Matrix3ToMatrix4(mat);
+
+sfw::drawTextureMatrix(handle, 0, WHITE, inMat.m);
+}
+sfw::termContext();
+
+return 0;
+}
+*/

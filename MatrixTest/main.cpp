@@ -13,9 +13,9 @@ int main()
 	Vector3 augoo(1, 0, 0);
 	Vector3 ray(1, -1, 0);
 	cout << augoo.x << "," << augoo.y << "," << augoo.z << endl;
-	cout << augoo.Normal().x << "," << augoo.Normal().y << "," << augoo.Normal().z << endl;
-	cout << ray.Reflect(augoo.Normal()).x << "," << ray.Reflect(augoo.Normal()).y << "," << ray.Reflect(augoo.Normal()).z << endl;
-	cout << Reflect(ray, augoo.Normal()).x << "," << Reflect(ray, augoo.Normal()).y << "," << Reflect(ray, augoo.Normal()).z << endl;
+	cout << augoo.Perp().x << "," << augoo.Perp().y << "," << augoo.Perp().z << endl;
+	cout << ray.Reflect(augoo.Perp()).x << "," << ray.Reflect(augoo.Perp()).y << "," << ray.Reflect(augoo.Perp()).z << endl;
+	cout << Reflect(ray, augoo.Perp()).x << "," << Reflect(ray, augoo.Perp()).y << "," << Reflect(ray, augoo.Perp()).z << endl;
 
 	system("pause");
 	return 0;

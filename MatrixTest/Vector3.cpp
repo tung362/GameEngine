@@ -35,6 +35,11 @@ void Vector3::Normalize()
 	z = tempz;
 }
 
+Vector3 Vector3::Normal()
+{
+	return (*this) / Magnitude();
+}
+
 Vector3 Vector3::CrossProduct(Vector3 b)
 {
 	Vector3 crossProduct;
@@ -44,7 +49,7 @@ Vector3 Vector3::CrossProduct(Vector3 b)
 	return crossProduct;
 }
 
-Vector3 Vector3::Normal()
+Vector3 Vector3::Perp()
 {
 	return Vector3(-y, x, 0);
 }

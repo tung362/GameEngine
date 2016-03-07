@@ -121,6 +121,7 @@
   <ItemGroup>
     <ClCompile Include="AABB.cpp" />
     <ClCompile Include="Circle.cpp" />
+    <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Comments.cpp" />
     <ClCompile Include="main.cpp" />
@@ -129,9 +130,11 @@
     <ClCompile Include="Plane.cpp" />
     <ClCompile Include="Ray.cpp" />
     <ClCompile Include="Rigidbody.cpp" />
+    <ClCompile Include="Shape.cpp" />
     <ClCompile Include="TFunction.cpp" />
     <ClCompile Include="TNLDebug.cpp" />
     <ClCompile Include="Transform.cpp" />
+    <ClCompile Include="Vector2.cpp" />
     <ClCompile Include="Vector3.cpp" />
   </ItemGroup>
   <ItemGroup>

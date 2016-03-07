@@ -22,8 +22,9 @@ public:
 	Vector3(float x1, float y1, float z1);
 	float Magnitude();
 	void Normalize();
-	Vector3 CrossProduct(Vector3 b);
 	Vector3 Normal();
+	Vector3 CrossProduct(Vector3 b);
+	Vector3 Perp();
 	Vector3 Reflect(Vector3 normal);
 	float GetAngle2D();
 	static Vector3 SetAngle(float angle);
@@ -46,6 +47,39 @@ Vector3 operator*(float otherNum, Vector3 vec);
 Vector3 operator-(Vector3 vec);
 void operator*=(float otherNum, Vector3 vec);
 
+struct Vector2
+{
+public:
+	float x;
+	float y;
+	Vector2();
+	Vector2(float x1, float y1);
+	float Magnitude();
+	void Normalize();
+	Vector2 Normal();
+	Vector2 Perp();
+	Vector2 Reflect(Vector2 normal);
+	float GetAngle2D();
+	static Vector2 SetAngle(float angle);
+
+	void operator=(Vector2 otherVec);
+	Vector2 operator+(Vector2 otherVec);
+	Vector2 operator-(Vector2 otherVec);
+	Vector2 operator*(Vector2 otherVec);
+	Vector2 operator/(Vector2 otherVec);
+	Vector2 operator*(float otherNum);
+	Vector2 operator/(float otherNum);
+	void operator+=(Vector2 otherVec);
+	void operator-=(Vector2 otherVec);
+	void operator*=(Vector2 otherVec);
+	void operator/=(Vector2 otherVec);
+	bool operator==(Vector2 otherVec);
+	bool operator!=(Vector2 otherVec);
+};
+Vector2 operator*(float otherNum, Vector2 vec);
+Vector2 operator-(Vector2 vec);
+void operator*=(float otherNum, Vector2 vec);
+
 struct Matrix3x3
 {
 public:
@@ -62,8 +96,8 @@ public:
 			  float r0c2, float r1c2, float r2c2);
 	static Matrix3x3 Identity();
 	static Matrix3x3 Rotate(float radian);
-	static Matrix3x3 Scale(const Vector3& scale);
-	static Matrix3x3 Translate(const Vector3& translation);
+	static Matrix3x3 Scale(const Vector2& scale);
+	static Matrix3x3 Translate(const Vector2& translation);
 
 	void Transpose();
 	Matrix3x3 GetTranspose() const;
@@ -84,7 +118,7 @@ public:
 	void operator -=(const Matrix3x3& otherMatrix);
 	void operator *=(const Matrix3x3& otherMatrix);
 };
-Vector3 operator*(const Matrix3x3 &_A, const Vector3 &b);
+Vector3 operator*(const Matrix3x3 &a, const Vector3 &b);
 
 struct Matrix4x4
 {
@@ -99,14 +133,34 @@ public:
 			  float r0c1, float r1c1, float r2c1, float r3c1,
 			  float r0c2, float r1c2, float r2c2, float r3c2,
 			  float r0c3, float r1c3, float r2c3, float r3c3);
+
+	static Matrix4x4 Identity();
+	static Matrix4x4 Rotate(float radian);
+	static Matrix4x4 Scale(const Vector2& scale);
+	static Matrix4x4 Translate(const Vector2& translation);
+
+	void Transpose();
+	Matrix4x4 GetTranspose() const;
+	float Determinant();
+	void Inverse();
+	Matrix4x4 GetInverse();
+
+	Matrix4x4 operator +(const Matrix4x4& otherMatrix) const;
+	Matrix4x4 operator -(const Matrix4x4& otherMatrix) const;
+	Matrix4x4 operator *(const Matrix4x4& otherMatrix) const;
+	//Vector3 operator *(const Vector3& b) const;
+	void operator =(const Matrix4x4& otherMatrix);
+	void operator +=(const Matrix4x4& otherMatrix);
+	void operator -=(const Matrix4x4& otherMatrix);
+	void operator *=(const Matrix4x4& otherMatrix);
 };
 
 struct Transform
 {
 	Transform *parent;
 	std::list<Transform*> children;
-	Vector3 position;
-	Vector3 Scale;
+	Vector2 position;
+	Vector2 Scale;
 	float angle;
 
 public:
@@ -115,26 +169,26 @@ public:
 	Matrix3x3 GetGlobalTransform() const;
 
 	void SetParent(Transform * newParent);
-	void SetPosition(const Vector3 & newPosition);
-	void SetScale(const Vector3 & newScale);
+	void SetPosition(const Vector2 & newPosition);
+	void SetScale(const Vector2 & newScale);
 	void SetAngle(float newAngle);
 
-	Vector3 GetPosition() const;
-	Vector3 GetScale() const;
+	Vector2 GetPosition() const;
+	Vector2 GetScale() const;
 	float GetAngle() const;
 
-	Vector3 GetRight() const;
-	Vector3 GetUp() const;
+	Vector2 GetRight() const;
+	Vector2 GetUp() const;
 };
 
 struct Rigidbody
 {
 public:
-	Vector3 gravity;
-	Vector3 velocity;
-	Vector3 acceleration;
-	Vector3 force;
-	Vector3 jerk;
+	Vector2 gravity;
+	Vector2 velocity;
+	Vector2 acceleration;
+	Vector2 force;
+	Vector2 jerk;
 	float gravityScaler;
 	float mass;
 	float drag;
@@ -143,7 +197,7 @@ public:
 	float torque;
 	float angularDrag;
 	Rigidbody();
-	void AddForce(const Vector3 & newForce);
+	void AddForce(const Vector2 & newForce);
 	void AddTorque(float newTorque);
 	void Integrate(Transform * transform, float dt);
 };
@@ -153,51 +207,52 @@ public:
 struct AABB
 {
 public:
-	Vector3 position;
-	Vector3 halfExtents;
+	Vector2 position;
+	Vector2 halfExtents; //Width, Height
 	AABB();
-	Vector3 Min();
-	Vector3 Max();
+	AABB(Vector2 newPosition, Vector2 newHalfExtents);
+	Vector2 Min();
+	Vector2 Max();
 };
 
 struct Circle
 {
 public:
-	Vector3 position;
+	Vector2 position;
 	float radius;
 	Circle();
-	Circle(Vector3 newPosition, float newRadius);
+	Circle(Vector2 newPosition, float newRadius);
 };
 
 struct Plane
 {
 public:
-	Vector3 position;
-	Vector3 normal;
+	Vector2 position;
+	Vector2 normal;
 	Plane();
-	Plane(Vector3 newPosition, Vector3 newNormal);
+	Plane(Vector2 newPosition, Vector2 newNormal);
 };
 
 struct Ray
 {
 public:
-	Vector3 position;
-	Vector3 direction;
+	Vector2 position;
+	Vector2 direction;
 	float length;
 	Ray();
-	Ray(Vector3 newPosition, Vector3 newDirection, float newLength);
+	Ray(Vector2 newPosition, Vector2 newDirection, float newLength);
 };
 
 struct ConvexHull
 {
-	std::vector<Vector3> verts;
+	std::vector<Vector2> verts;
 };
 
-AABB operator*(const Matrix3x3 &m, const AABB &a);
-Circle operator*(const Matrix3x3 &m, const Circle &a);
-Ray operator*(const Matrix3x3 &m, const Ray &a);
-Plane operator*(const Matrix3x3 &m, const Plane &a);
-ConvexHull operator*(const Matrix3x3 &m, const ConvexHull &a);
+AABB operator*(Matrix3x3 &m, AABB &a);
+Circle operator*(Matrix3x3 &m, Circle &a);
+Ray operator*(Matrix3x3 &m, Ray &a);
+Plane operator*(Matrix3x3 &m, Plane &a);
+ConvexHull operator*(Matrix3x3 &m, ConvexHull &a);
 /*End Of Shapes*/
 
 /*Collision*/
@@ -205,35 +260,53 @@ struct CollisionData // Wrapper for Minimum Translation Vector
 {
 	bool     isOverlap;         // Did we collide?
 	float    penetrationDepth;
-	Vector3  collisionNormal;   // CollisionNormal * PenetrationDepth = Minimum Translation Vector, also called the impulse vector, very important! 
-	Vector3  pointOfContact;    // optional.
+	Vector2  collisionNormal;   // CollisionNormal * PenetrationDepth = Minimum Translation Vector, also called the impulse vector, very important! 
+	Vector2  pointOfContact;    // optional.
 };
 
-CollisionData CollisionTest(const AABB &a, const AABB &b);
-CollisionData CollisionTest(const AABB &a, const Circle &b);
-CollisionData CollisionTest(const AABB &a, const Plane &b);
-CollisionData CollisionTest(const AABB &a, const Ray &b);
-CollisionData CollisionTest(const Circle &a, const Circle &b);
-CollisionData CollisionTest(const Circle &a, const Plane &b);
-CollisionData CollisionTest(const Circle &a, const Ray &b);
-CollisionData CollisionTest(const Ray &a, const Plane &b);
+class Collider
+{
+public:
+	enum SHAPE { e_CIRCLE = 1, e_AABB = 2, e_RAY = 4, e_PLANE = 8 } shape;
+	union
+	{
+		Circle  circle;
+		AABB    aabb;
+		Ray     ray;
+		Plane   plane;
+	};
+
+	Collider();
+	ConvexHull chull;
+};
+
+CollisionData EvaluateCollision(const Transform &at, const Collider &ac, const Transform &bt, const Collider &bc);
+
+CollisionData CollisionTest(AABB &a, AABB &b);
+CollisionData CollisionTest(AABB &a, Circle &b);
+CollisionData CollisionTest(AABB &a, Plane &b);
+CollisionData CollisionTest(AABB &a, Ray &b);
+CollisionData CollisionTest(Circle &a, Circle &b);
+CollisionData CollisionTest(Circle &a, Plane &b);
+CollisionData CollisionTest(Circle &a, Ray &b);
+CollisionData CollisionTest(Ray &a, Plane &b);
 
 //Reverse
-CollisionData CollisionTest(const Circle &b, const AABB &a);
-CollisionData CollisionTest(const Plane &b, const AABB &a);
-CollisionData CollisionTest(const Ray &b, const AABB &a);
-CollisionData CollisionTest(const Plane &b, const Circle &a);
-CollisionData CollisionTest(const Ray &b, const Circle &a);
-CollisionData CollisionTest(const Plane &b, const Ray &a);
+CollisionData CollisionTest(Circle &b, AABB &a);
+CollisionData CollisionTest(Plane &b, AABB &a);
+CollisionData CollisionTest(Ray &b, AABB &a);
+CollisionData CollisionTest(Plane &b, Circle &a);
+CollisionData CollisionTest(Ray &b, Circle &a);
+CollisionData CollisionTest(Plane &b, Ray &a);
 
 //Convex Hull
-CollisionData CollisionTest(const ConvexHull &a, const ConvexHull &b);
-CollisionData CollisionTest(const ConvexHull &a, const Circle &b);
-CollisionData CollisionTest(const ConvexHull &a, const Ray &b);
-CollisionData CollisionTest(const ConvexHull &a, const Plane &b);
-CollisionData CollisionTest(const ConvexHull &a, const AABB &b);
+CollisionData CollisionTest(ConvexHull &a, ConvexHull &b);
+CollisionData CollisionTest(ConvexHull &a, Circle &b);
+CollisionData CollisionTest(ConvexHull &a, Ray &b);
+CollisionData CollisionTest(ConvexHull &a, Plane &b);
+CollisionData CollisionTest(ConvexHull &a, AABB &b);
 
-float Point_Plane_Dist(const Vector3 &a, const Plane &b);
+float Point_Plane_Dist(const Vector2 &a, const Plane &b);
 float Ray_Plane_Dist(const Ray &a, const Plane &b);
 /*End of Collision*/
 
@@ -241,13 +314,20 @@ float Ray_Plane_Dist(const Ray &a, const Plane &b);
 Matrix4x4 Matrix3ToMatrix4(Matrix3x3 m, float Z);
 Matrix4x4 Matrix3ToMatrix4(float *v, float Z);
 float Distance(Vector3 vec1, Vector3 vec2);
+float Distance(Vector2 vec1, Vector2 vec2);
 float DotPro(Vector3 vec, Vector3 otherVec);
+float DotPro(Vector2 vec, Vector2 otherVec);
 Vector3 ILerp(Vector3 start, Vector3 target, float percentage);
+Vector2 ILerp(Vector2 start, Vector2 target, float percentage);
 float ILerp(float start, float target, float percentage);
 Vector3 CrossProduct(Vector3 a, Vector3 b);
 Vector3 SurfaceNormal(Vector3 a, Vector3 b, Vector3 c);
 Vector3 Reflect(Vector3 vec1, Vector3 normal);
+Vector2 Reflect(Vector2 vec1, Vector2 normal);
 float Clamp(float min, float max, float value);
+Vector3 Clamp(Vector3 min, Vector3 max, Vector3 value);
+Vector2 Clamp(Vector2 min, Vector2 max, Vector2 value);
 
 void DebugVector3();
 void DebugMatrix3x3();
+void DebugMatrix4x4();
