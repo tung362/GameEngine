@@ -2,15 +2,30 @@
 #include <cstring>
 #include "TNL.h"
 
+
 using std::cout;
 using std::endl;
 
 CollisionData CollisionTest(AABB &a, AABB &b)
 {
 	CollisionData temp;
+	//Is colliding
 	if(a.Max().x >= b.Min().x && b.Max().x >= a.Min().x &&
 	   a.Max().y >= b.Min().y && b.Max().y >= a.Min().y) temp.isOverlap = true;
 	else temp.isOverlap = false;
+
+	//Penetration depth
+	Vector2 pDR = a.Max() - b.Min();
+	Vector2 pDL = b.Max() - a.Min();
+	Vector2 pD = Vector2(fminf(pDR.x, pDL.x), fminf(pDR.y, pDL.y));
+	temp.penetrationDepth = fminf(pD.x, pD.y);
+
+	//Collision normal
+	Vector2 handedness = Vector2(std::copysignf(1, pDR.x - pDL.x), std::copysignf(1, pDR.y - pDL.y));
+	temp.collisionNormal = handedness * temp.penetrationDepth;
+
+	//Impulse
+	temp.impulseVector = temp.collisionNormal * temp.penetrationDepth;
 	return temp;
 }
 

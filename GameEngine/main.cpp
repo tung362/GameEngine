@@ -95,13 +95,13 @@ int main()
 		sfw::drawTextureMatrix(handle, 0, MAGENTA, m2.m);
 
 		//CircleCircleTest(acicle, acicle2 ,speed);
-		//BoxBoxTest(abox, abox2, speed);
+		BoxBoxTest(abox, abox2, speed);
 		//BoxCircleTest(abox2, acicle, speed);
 		//CirclePlaneTest(acicle, aplane, speed);
 		//BoxPlaneTest(abox, aplane, speed);
 		//RayPlaneTest(aray, aplane, speed);
 		//RayCircleTest(aray, acicle2, speed);
-		RayCircleTest(aray, abox, speed);
+		//RayCircleTest(aray, abox, speed);
 	}
 	sfw::termContext();
 

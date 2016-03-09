@@ -261,10 +261,11 @@ struct CollisionData // Wrapper for Minimum Translation Vector
 	bool     isOverlap;         // Did we collide?
 	float    penetrationDepth;
 	Vector2  collisionNormal;   // CollisionNormal * PenetrationDepth = Minimum Translation Vector, also called the impulse vector, very important! 
-	Vector2  pointOfContact;    // optional.
+	Vector2  impulseVector;
+	//Vector2  pointOfContact;    // optional.
 };
 
-class Collider
+struct Collider
 {
 public:
 	enum SHAPE { e_CIRCLE = 1, e_AABB = 2, e_RAY = 4, e_PLANE = 8 } shape;
@@ -277,6 +278,7 @@ public:
 	};
 
 	Collider();
+
 	ConvexHull chull;
 };
 
