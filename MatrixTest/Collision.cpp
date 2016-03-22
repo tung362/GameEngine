@@ -19,13 +19,16 @@ CollisionData CollisionTest(AABB &a, AABB &b)
 	Vector2 pDL = b.Max() - a.Min();
 	Vector2 pD = Vector2(fminf(pDR.x, pDL.x), fminf(pDR.y, pDL.y));
 	temp.penetrationDepth = fminf(pD.x, pD.y);
+	//cout << "Penetration: " << temp.penetrationDepth << endl;
 
 	//Collision normal
 	Vector2 handedness = Vector2(std::copysignf(1, pDR.x - pDL.x), std::copysignf(1, pDR.y - pDL.y));
 	temp.collisionNormal = handedness * temp.penetrationDepth;
+	//cout << "Normal: " << temp.collisionNormal.x << "," << temp.collisionNormal.y << endl;
 
 	//Impulse
 	temp.impulseVector = temp.collisionNormal * temp.penetrationDepth;
+	//cout << "Normal: " << temp.impulseVector.x << "," << temp.impulseVector.y << endl;
 	return temp;
 }
 
