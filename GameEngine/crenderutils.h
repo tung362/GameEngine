@@ -1,9 +1,9 @@
 #pragma once
 #include "VMath.h"
 //#include "Shapes.h"
-//#include "Transform.h"
-//#include "Rigidbody.h"
-//#include "Collider.h"
+#include "Transform.h"
+#include "Rigidbody.h"
+#include "Collider.h"
 
 void drawMatrix(const Matrix3x3 &);
 void drawVector(const Matrix3x3 &, const Vector2 &, unsigned TINT = 0x00ffffff);

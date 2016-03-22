@@ -154,53 +154,6 @@ public:
 	void operator -=(const Matrix4x4& otherMatrix);
 	void operator *=(const Matrix4x4& otherMatrix);
 };
-
-struct Transform
-{
-	Transform *parent;
-	std::list<Transform*> children;
-	Vector2 position;
-	Vector2 Scale;
-	float angle;
-
-public:
-	Transform();
-	~Transform();
-	Matrix3x3 GetGlobalTransform() const;
-
-	void SetParent(Transform * newParent);
-	void SetPosition(const Vector2 & newPosition);
-	void SetScale(const Vector2 & newScale);
-	void SetAngle(float newAngle);
-
-	Vector2 GetPosition() const;
-	Vector2 GetScale() const;
-	float GetAngle() const;
-
-	Vector2 GetRight() const;
-	Vector2 GetUp() const;
-};
-
-struct Rigidbody
-{
-public:
-	Vector2 gravity;
-	Vector2 velocity;
-	Vector2 acceleration;
-	Vector2 force;
-	Vector2 jerk;
-	float gravityScaler;
-	float mass;
-	float drag;
-	float angularVelocity;
-	float angularAcceleration;
-	float torque;
-	float angularDrag;
-	Rigidbody();
-	void AddForce(const Vector2 & newForce);
-	void AddTorque(float newTorque);
-	void Integrate(Transform * transform, float dt);
-};
 /*End of Math Stuff*/
 
 /*Shapes*/
@@ -265,25 +218,6 @@ struct CollisionData // Wrapper for Minimum Translation Vector
 	//Vector2  pointOfContact;    // optional.
 };
 
-struct Collider
-{
-public:
-	enum SHAPE { e_CIRCLE = 1, e_AABB = 2, e_RAY = 4, e_PLANE = 8 } shape;
-	union
-	{
-		Circle  circle;
-		AABB    aabb;
-		Ray     ray;
-		Plane   plane;
-	};
-
-	Collider();
-
-	ConvexHull chull;
-};
-
-CollisionData EvaluateCollision(const Transform &at, const Collider &ac, const Transform &bt, const Collider &bc);
-
 CollisionData CollisionTest(AABB &a, AABB &b);
 CollisionData CollisionTest(AABB &a, Circle &b);
 CollisionData CollisionTest(AABB &a, Plane &b);
@@ -329,6 +263,8 @@ Vector2 Reflect(Vector2 vec1, Vector2 normal);
 float Clamp(float min, float max, float value);
 Vector3 Clamp(Vector3 min, Vector3 max, Vector3 value);
 Vector2 Clamp(Vector2 min, Vector2 max, Vector2 value);
+Vector2 Perp(Vector2 vec1);
+Vector3 Perp(Vector3 vec1);
 
 void DebugVector3();
 void DebugMatrix3x3();

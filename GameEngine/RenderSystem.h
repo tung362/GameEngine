@@ -13,11 +13,11 @@ class RenderSystem : public System
     // the actual draw call
     void update(Handle<Entity> i)
     {
-        Matrix3 m = 
-                  i->transform->getGlobalTransform()
-                  * Matrix3::translate(i->sprite->offset)
-                  * Matrix3::scale(i->sprite->dimension)
-                  * Matrix3::rotate(i->sprite->angle);
+        Matrix3x3 m = 
+                  i->transform->GetGlobalTransform()
+                  * Matrix3x3::Translate(i->sprite->offset)
+                  * Matrix3x3::Scale(i->sprite->dimension)
+                  * Matrix3x3::Rotate(i->sprite->angle);
 
         Asset::instance().drawTexture(i->sprite->assetName, m);
     }

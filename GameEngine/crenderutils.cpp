@@ -48,4 +48,3 @@ void drawCircle(const Circle    &t, unsigned TINT)
 {
     sfw::drawCircle(t.position.x, t.position.y, t.radius, 6, TINT);
 }
-

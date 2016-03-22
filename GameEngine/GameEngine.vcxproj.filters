@@ -19,6 +19,12 @@
     <Filter Include="CoreSrc">
       <UniqueIdentifier>{7fc96468-3372-4dce-a713-0d1dda4c1bc3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CoreComponent">
+      <UniqueIdentifier>{d5d63568-63f7-4d4a-8eb5-12d4c45e188d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CoreComponentSrc">
+      <UniqueIdentifier>{578fc68c-c8e6-4d29-abf1-8ee7c16a8bd6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -47,6 +53,15 @@
     </ClCompile>
     <ClCompile Include="crenderutils.cpp">
       <Filter>CoreSrc</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>CoreComponentSrc</Filter>
+    </ClCompile>
+    <ClCompile Include="Rigidbody.cpp">
+      <Filter>CoreComponentSrc</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>CoreComponentSrc</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -121,6 +136,15 @@
     </ClInclude>
     <ClInclude Include="VMath.h">
       <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Rigidbody.h">
+      <Filter>CoreComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>CoreComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>CoreComponent</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

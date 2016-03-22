@@ -135,3 +135,13 @@ Vector2 Clamp(Vector2 min, Vector2 max, Vector2 value)
 
 	return Vector2(x, y);
 }
+
+Vector2 Perp(Vector2 vec1)
+{
+	return Vector2(-vec1.y, vec1.x);
+}
+
+Vector3 Perp(Vector3 vec1)
+{
+	return Vector3(-vec1.y, vec1.x, vec1.z);
+}

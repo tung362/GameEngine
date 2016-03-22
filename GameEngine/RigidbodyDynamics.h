@@ -13,7 +13,7 @@ class RigidbodyDynamics : public System
 
     void update(Handle<Entity> i)
     {
-        i->rigidbody->integrate(&i->transform, 
+        i->rigidbody->Integrate(&i->transform, 
                                Time::instance().getDeltaTime());
     }
 };

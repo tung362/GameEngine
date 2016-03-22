@@ -1,6 +1,5 @@
 #pragma once
 
-
 class Input
 {
     bool isInit;

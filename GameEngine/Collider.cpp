@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cstring>
-#include "TNL.h"
+#include "Collider.h"
 
 using std::cout;
 using std::endl;

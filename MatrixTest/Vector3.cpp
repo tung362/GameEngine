@@ -51,7 +51,7 @@ Vector3 Vector3::CrossProduct(Vector3 b)
 
 Vector3 Vector3::Perp()
 {
-	return Vector3(-y, x, 0);
+	return Vector3(-y, x, z);
 }
 
 Vector3 Vector3::Reflect(Vector3 normal)

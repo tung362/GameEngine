@@ -17,7 +17,7 @@ struct Factory
         e->collider->shape = Collider::e_CIRCLE;
         e->rigidbody->mass = mass;
         e->rigidbody->velocity = vel;
-        e->transform->setPosition(pos);
+        e->transform->SetPosition(pos);
         return e;
     }
 
@@ -30,7 +30,7 @@ struct Factory
 
         e->collider->plane.normal = normal;
         e->collider->shape = Collider::e_PLANE;
-        e->transform->setPosition(pos);
+        e->transform->SetPosition(pos);
 
         return e;
     }
@@ -49,8 +49,8 @@ struct Factory
         e->sprite->dimension = Vector2{ 72,72 };
 
         e->collider->shape = Collider::e_AABB;
-        e->collider->aabb.halfextents = Vector2{36,36};
-        e->transform->setPosition(pos);
+        e->collider->aabb.halfExtents = Vector2{36,36};
+        e->transform->SetPosition(pos);
 
         return e;
     }
@@ -63,11 +63,11 @@ struct Factory
         e->transform = Transform::make();
         e->lifecycle = Lifecycle::make();
         
-        e->transform->setPosition(pos);
+        e->transform->SetPosition(pos);
         e->rigidbody->velocity = dir * speed;
         e->lifecycle->lifespan = life;
 
-        e->transform->setAngle(perp(dir).angle());
+        e->transform->SetAngle(Perp(dir).GetAngle2D());
 
         return e;
     }
