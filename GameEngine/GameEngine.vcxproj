@@ -125,17 +125,38 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Assets.cpp" />
+    <ClCompile Include="crenderutils.cpp" />
     <ClCompile Include="GameDebug.cpp" />
     <ClCompile Include="DrawBox.cpp" />
     <ClCompile Include="DrawPlane.cpp" />
+    <ClCompile Include="Input.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Time.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Assets.h" />
+    <ClInclude Include="CollisionDetection.h" />
+    <ClInclude Include="crenderutils.h" />
+    <ClInclude Include="DebugDraw.h" />
+    <ClInclude Include="DynamicResolution.h" />
+    <ClInclude Include="Entity.h" />
+    <ClInclude Include="Factory.h" />
     <ClInclude Include="GameFunction.h" />
+    <ClInclude Include="GCData.h" />
+    <ClInclude Include="Input.h" />
     <ClInclude Include="KeycodeInput.h" />
+    <ClInclude Include="Lifespan.h" />
+    <ClInclude Include="LifetimeSystem.h" />
+    <ClInclude Include="PlayerController.h" />
+    <ClInclude Include="PlayerFlightSystem.h" />
+    <ClInclude Include="RenderSystem.h" />
+    <ClInclude Include="RigidbodyDynamics.h" />
     <ClInclude Include="sfwdraw.h" />
+    <ClInclude Include="Sprite.h" />
+    <ClInclude Include="StaticResolution.h" />
+    <ClInclude Include="System.h" />
+    <ClInclude Include="Time.h" />
     <ClInclude Include="VMath.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>

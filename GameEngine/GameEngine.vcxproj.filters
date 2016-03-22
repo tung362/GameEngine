@@ -33,10 +33,19 @@
     <ClCompile Include="GameDebug.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Assets.cpp">
+      <Filter>CoreSrc</Filter>
+    </ClCompile>
     <ClCompile Include="Window.cpp">
       <Filter>CoreSrc</Filter>
     </ClCompile>
-    <ClCompile Include="Assets.cpp">
+    <ClCompile Include="Time.cpp">
+      <Filter>CoreSrc</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>CoreSrc</Filter>
+    </ClCompile>
+    <ClCompile Include="crenderutils.cpp">
       <Filter>CoreSrc</Filter>
     </ClCompile>
   </ItemGroup>
@@ -50,10 +59,64 @@
     <ClInclude Include="GameFunction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Window.h">
+    <ClInclude Include="Assets.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="Assets.h">
+    <ClInclude Include="CollisionDetection.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="crenderutils.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugDraw.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="DynamicResolution.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="GCData.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Lifespan.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="LifetimeSystem.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerController.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerFlightSystem.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderSystem.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="RigidbodyDynamics.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticResolution.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="System.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Time.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="VMath.h">
