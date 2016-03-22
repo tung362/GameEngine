@@ -3,6 +3,8 @@
 #include <list>
 #define PI 3.14159265359
 #define FTL_EPSILON 0.0001f
+#define RAD2DEG 57.2958
+#define DEG2RAD 0.0174533
 
 struct Vector3;
 struct Matrix3x3;
