@@ -1,5 +1,5 @@
 #pragma once
-#include "MatrixTest\TNL.h"
+#include "vmath.h"
 
 void DrawBox(Vector2 position, float height, float width);
 void DrawPlane(Vector2 position, Vector2 normal);

@@ -1,42 +1,23 @@
 #pragma once
-#include <cassert>;
-#include "sfwdraw.h"
+#include <cassert>
+#include <typeinfo>
 
-#define INIT_ASSERT assert(IsInitialized && "Window is not initialized!");
+#define INIT_ASSERT(name) assert(isInit && #name "not initialized!")
 
 class Window
 {
-private:
-	Window() : IsInitialized(false){}
-	bool IsInitialized;
-	unsigned Width, Height;
+	bool isInit;
+	unsigned width, height;
+	Window() : isInit(false) {}
+
 public:
-	//Only allow one instance
-	static Window &Instance() 
-	{
-		static Window Instance;
-		return Instance;
-	}
 
-	bool Init(unsigned width = 600, unsigned height = 800, const char *Title = "GameEngine")
-	{
-		sfw::initContext(width, height, Title);
-		return IsInitialized;
-	}
-	bool Step()
-	{
-		INIT_ASSERT;
-		return sfw::initContext();
-	}
+	static Window &instance() { static Window instance; return instance; }
+	bool init(unsigned Width = 800, unsigned Height = 600, const char *Title = "Engine");
+	bool step();
+	void term();
 
-	void Term() 
-	{
-		INIT_ASSERT;
-		sfw::termContext();
-		IsInitialized = false;
-	}
-
-	unsigned GetWidth() { INIT_ASSERT; return Width; }
-	unsigned GetHeight() { INIT_ASSERT; return Height; }
-	bool GetIsInitialized() { return IsInitialized; }
+	unsigned getWidth() { INIT_ASSERT(Window); return width; }
+	unsigned getHeight() { INIT_ASSERT(Window); return height; }
+	bool     isInitialized() { return isInit; }
 };

@@ -16,6 +16,9 @@
     <Filter Include="Core">
       <UniqueIdentifier>{82008078-31db-476d-8eb9-d4163942b5e1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CoreSrc">
+      <UniqueIdentifier>{7fc96468-3372-4dce-a713-0d1dda4c1bc3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -27,11 +30,14 @@
     <ClCompile Include="DrawPlane.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Window.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GameDebug.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>CoreSrc</Filter>
+    </ClCompile>
+    <ClCompile Include="Assets.cpp">
+      <Filter>CoreSrc</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -45,6 +51,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Window.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Assets.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="VMath.h">
       <Filter>Core</Filter>
     </ClInclude>
   </ItemGroup>
