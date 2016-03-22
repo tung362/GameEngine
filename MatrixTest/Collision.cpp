@@ -27,7 +27,7 @@ CollisionData CollisionTest(AABB &a, AABB &b)
 	//cout << "Normal: " << temp.collisionNormal.x << "," << temp.collisionNormal.y << endl;
 
 	//Impulse
-	temp.impulseVector = temp.collisionNormal * temp.penetrationDepth;
+	//temp.impulseVector = temp.collisionNormal * temp.penetrationDepth;
 	//cout << "Normal: " << temp.impulseVector.x << "," << temp.impulseVector.y << endl;
 	return temp;
 }

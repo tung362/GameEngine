@@ -11,13 +11,13 @@ class DynamicResolution : public CollisionSystem
 
     void update(Collision c)
     {
-        Vector2 MTV = c.collision.normal * c.collision.depth;
+        Vector2 MTV = c.collision.collisionNormal * c.collision.penetrationDepth;
 
-        Vector2 p1 = c.first ->transform->getPosition() - MTV/2;
-        Vector2 p2 = c.second->transform->getPosition() + MTV/2;
+        Vector2 p1 = c.first ->transform->GetPosition() - MTV/2;
+        Vector2 p2 = c.second->transform->GetPosition() + MTV/2;
 
-        c.first ->transform->setPosition(p1);
-        c.second->transform->setPosition(p2);
+        c.first ->transform->SetPosition(p1);
+        c.second->transform->SetPosition(p2);
 
         std::swap(c.first->rigidbody->velocity, c.second->rigidbody->velocity);
     }

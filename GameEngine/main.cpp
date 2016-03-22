@@ -125,10 +125,10 @@ int main()
 }*/
 
 #include "Window.h"
-//#include "Input.h"
+#include "Input.h"
 #include "Time.h"
 #include <iostream>
-//#include "Factory.h"
+#include "Factory.h"
 //#include "DebugDraw.h"
 //#include "RigidbodyDynamics.h"
 //#include "LifetimeSystem.h"
@@ -138,7 +138,7 @@ int main()
 
 //#include "PlayerFlightSystem.h"
 //#include "RenderSystem.h"
-//#include "Assets.h"
+#include "Assets.h"
 
 void main()
 {

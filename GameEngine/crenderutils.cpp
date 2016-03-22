@@ -1,4 +1,4 @@
-#include "sfwdraw.h"
+/*#include "sfwdraw.h"
 #include "crenderutils.h"
 
 void drawMatrix(const Matrix3x3 &a)
@@ -48,3 +48,4 @@ void drawCircle(const Circle    &t, unsigned TINT)
 {
     sfw::drawCircle(t.position.x, t.position.y, t.radius, 6, TINT);
 }
+*/

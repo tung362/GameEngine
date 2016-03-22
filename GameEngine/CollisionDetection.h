@@ -43,7 +43,7 @@ class CollisionDetection : public BinarySystem
     {
         auto cd = EvaluateCollision(*i->transform, *i->collider,
                                     *j->transform, *j->collider);
-        if (cd.result)
+        if (cd.isOverlap)
             Collision::getData().push_back(Collision{i,j,cd});
     }
 };

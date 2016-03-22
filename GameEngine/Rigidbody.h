@@ -2,7 +2,7 @@
 #include "VMath.h"
 #include "GCData.h"
 
-struct Rigidbody : public GCData<Rigidbody>
+class Rigidbody : public GCData<Rigidbody>
 {
 public:
 	Vector2 gravity;

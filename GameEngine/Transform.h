@@ -3,7 +3,7 @@
 #include <list>
 #include "GCData.h"
 
-struct Transform : public GCData<Transform>
+class Transform : public GCData<Transform>
 {
 	Transform *parent;
 	std::list<Transform*> children;
