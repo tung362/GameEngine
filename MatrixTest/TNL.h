@@ -104,10 +104,6 @@ public:
 	void Transpose();
 	Matrix3x3 GetTranspose() const;
 	float Determinant();
-	void Cofactor();
-	Matrix3x3 GetCofactor();
-	void Adjugate();
-	Matrix3x3 GetAdjugate();
 	void Inverse();
 	Matrix3x3 GetInverse();
 

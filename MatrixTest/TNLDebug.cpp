@@ -77,81 +77,47 @@ void DebugVector3()
 
 void DebugMatrix3x3()
 {
-	//Default
+	Matrix3x3 TestTest1(1, 2, 3,
+		4, 5, 6,
+		7, 8, 9);
+	Matrix3x3 TestTest2(2, 2, 2,
+		2, 2, 2,
+		2, 2, 2);
+
+	cout << "Original:" << endl;
+	for (int col = 1; col < 4; ++col)
 	{
-		Matrix3x3 trix(1, 2, 3, 4, 5, 6, 7, 8, 9);
-		assert(trix.mm[0][0] == 1 && trix.mm[0][1] == 4 && trix.mm[0][2] == 7);
+		for (int row = 1; row < 4; ++row)
+		{
+			cout << TestTest1.mm[col - 1][row - 1] << ",";
+			if (row % 3 == 0) cout << endl;
+		}
 	}
+	cout << endl;
 
-	//Addition
+	cout << "Add:" << endl;
+	Matrix3x3 test1 = TestTest1 * TestTest2;
+	for (int col = 1; col < 4; ++col)
 	{
-		Matrix3x3 trix(1, 2, 3, 4, 5, 6, 7, 8, 9);
-		Matrix3x3 trix2(1, 2, 3, 4, 5, 6, 7, 8, 9);
-
-		Matrix3x3 Addtrix1 = trix + trix2;
-		trix += trix2;
-
-		assert(Addtrix1.mm[0][0] == 2 && Addtrix1.mm[0][1] == 8 && Addtrix1.mm[0][2] == 14);
-		assert(trix.mm[0][0] == 2 && trix.mm[0][1] == 8 && trix.mm[0][2] == 14);
+		for (int row = 1; row < 4; ++row)
+		{
+			cout << test1.mm[col - 1][row - 1] << ",";
+			if (row % 3 == 0) cout << endl;
+		}
 	}
+	cout << endl;
 
-	//Subtraction
+	cout << "Added:" << endl;
+	TestTest1 *= TestTest2;
+	for (int col = 1; col < 4; ++col)
 	{
-		Matrix3x3 trix(1, 2, 3, 4, 5, 6, 7, 8, 9);
-		Matrix3x3 trix2(1, 2, 3, 4, 5, 6, 7, 8, 9);
-
-		Matrix3x3 Addtrix1 = trix - trix2;
-		trix -= trix2;
-
-		assert(Addtrix1.mm[0][0] == 0 && Addtrix1.mm[0][1] == 0 && Addtrix1.mm[0][2] == 0);
-		assert(trix.mm[0][0] == 0 && trix.mm[0][1] == 0 && trix.mm[0][2] == 0);
+		for (int row = 1; row < 4; ++row)
+		{
+			cout << TestTest1.mm[col - 1][row - 1] << ",";
+			if (row % 3 == 0) cout << endl;
+		}
 	}
-
-	//Multiplication
-	{
-		Matrix3x3 trix(1, 2, 3, 4, 5, 6, 7, 8, 9);
-		Matrix3x3 trix2(1, 2, 3, 4, 5, 6, 7, 8, 9);
-
-		Matrix3x3 Addtrix1 = trix * trix2;
-		trix *= trix2;
-
-		//1 * 1 + 2 * 4 + 3 * 7 = 30
-		//4 * 1 + 5 * 4 + 6 * 7 = 66
-		//7 * 1 + 8 * 4 + 9 * 7 = 102
-		assert(Addtrix1.mm[0][0] == 30 && Addtrix1.mm[0][1] == 66 && Addtrix1.mm[0][2] == 102);
-		assert(trix.mm[0][0] == 30 && trix.mm[0][1] == 66 && trix.mm[0][2] == 102);
-	}
-
-	//Determinant
-	{
-		Matrix3x3 trix(1, 2, 3, 0, 1, 4, 5, 6, 0);
-		assert(trix.Determinant() == 1);
-	}
-
-	//Inverse
-	{
-		Matrix3x3 trix(0, 1, 1, 2, 2, 2, 2, 1, 2);
-		Matrix3x3 trix2 = trix.GetInverse();
-		assert(trix2.mm[0][0] == -1 && trix2.mm[1][0] == 0.5f && trix2.mm[2][0] == -0);
-		trix.Inverse();
-		assert(trix.mm[0][0] == -1 && trix.mm[1][0] == 0.5f && trix.mm[2][0] == -0);
-	}
-
-	//Rotation
-	{
-		Matrix3x3 trix;
-	}
-
-	//Scale
-	{
-		Matrix3x3 trix;
-	}
-
-	//Translation
-	{
-		Matrix3x3 trix;
-		assert(trix.Translate(Vector2(5, 8)).mm[2][0] == 5 && trix.Translate(Vector2(5, 8)).mm[2][1] == 8);
-	}
+	cout << endl;
 }
 
 void DebugMatrix4x4()

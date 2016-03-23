@@ -1,10 +1,12 @@
-/*#include <iostream>
+#include <iostream>
 #include <cstring>
 #include "Window.h"
 #include "sfwdraw.h"
 #include "MatrixTest\TNL.h"
 //#include "GameObject.h"
 #include "GameFunction.h"
+#include "Transform.h"
+#include "Rigidbody.h"
 //#include "Entity.h"
 //#include "Vector2.h"
 //#include "GLobalData.h"
@@ -65,6 +67,48 @@ int main()
 
 	Matrix3x3 mat;
 
+	Matrix3x3 TestTest1(1, 2, 3,
+						4, 5, 6,
+						7, 8, 9);
+	Matrix3x3 TestTest2(2, 2, 2,
+						2, 2, 2,
+						2, 2, 2);
+
+	cout << "Original:" << endl;
+	for (int col = 1; col < 4; ++col)
+	{
+		for (int row = 1; row < 4; ++row)
+		{
+			cout << TestTest1.mm[col - 1][row - 1] << ",";
+			if (row % 3 == 0) cout << endl;
+		}
+	}
+	cout << endl;
+
+	cout << "Add:" << endl;
+	Matrix3x3 poop1 = TestTest1.GetInverse();
+	for (int col = 1; col < 4; ++col)
+	{
+		for (int row = 1; row < 4; ++row)
+		{
+			cout << poop1.mm[col - 1][row - 1] << ",";
+			if (row % 3 == 0) cout << endl;
+		}
+	}
+	cout << endl;
+
+	cout << "Added:" << endl;
+	TestTest1.Inverse();
+	for (int col = 1; col < 4; ++col)
+	{
+		for (int row = 1; row < 4; ++row)
+		{
+			cout << TestTest1.mm[col - 1][row - 1] << ",";
+			if (row % 3 == 0) cout << endl;
+		}
+	}
+	cout << endl;
+
 	while (sfw::stepContext())
 	{
 
@@ -95,7 +139,7 @@ int main()
 		sfw::drawTextureMatrix(handle, 0, MAGENTA, m2.m);
 
 		//CircleCircleTest(acicle, acicle2 ,speed);
-		BoxBoxTest(abox, abox2, speed);
+		//BoxBoxTest(abox, abox2, speed);
 		//BoxCircleTest(abox2, acicle, speed);
 		//CirclePlaneTest(acicle, aplane, speed);
 		//BoxPlaneTest(abox, aplane, speed);
@@ -106,7 +150,7 @@ int main()
 	sfw::termContext();
 
 	return 0;
-}*/
+}
 
 /*int main()
 {
@@ -124,11 +168,11 @@ int main()
 	return 0;
 }*/
 
-#include "Window.h"
-#include "Input.h"
-#include "Time.h"
+/*#include "Window.h"
+//#include "Input.h"
+//#include "Time.h"
 #include <iostream>
-#include "Factory.h"
+//#include "Factory.h"
 //#include "DebugDraw.h"
 //#include "RigidbodyDynamics.h"
 //#include "LifetimeSystem.h"
@@ -138,7 +182,7 @@ int main()
 
 //#include "PlayerFlightSystem.h"
 //#include "RenderSystem.h"
-#include "Assets.h"
+//#include "Assets.h"
 
 void main()
 {
@@ -152,9 +196,9 @@ void main()
 
 	//Asset::instance().loadTexture("Ship", "../textures/spaceship.png");
 
-	/*//Factory::makeBall({ 40,  40 },  {10,10},  400,  40)->rigidbody->addTorque(1000);
-	//        Factory::makeBall({ 80,  200 },  { 100,0}, 120, 120);
-	//auto e = Factory::makeBall({ 720, 200 }, { }, 60, 1);*/
+	///Factory::makeBall({ 40,  40 },  {10,10},  400,  40)->rigidbody->addTorque(1000);
+	///        Factory::makeBall({ 80,  200 },  { 100,0}, 120, 120);
+	///auto e = Factory::makeBall({ 720, 200 }, { }, 60, 1);
 
 	//Factory::makePlayer({ 0,0 });
 
@@ -189,4 +233,4 @@ void main()
 	//time.term();
 	//input.term();
 	window.term();
-}
+}*/
