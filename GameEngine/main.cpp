@@ -1,4 +1,4 @@
-#include <iostream>
+/*#include <iostream>
 #include <cstring>
 #include "Window.h"
 #include "sfwdraw.h"
@@ -67,51 +67,8 @@ int main()
 
 	Matrix3x3 mat;
 
-	Matrix3x3 TestTest1(1, 2, 3,
-						4, 5, 6,
-						7, 8, 9);
-	Matrix3x3 TestTest2(2, 2, 2,
-						2, 2, 2,
-						2, 2, 2);
-
-	cout << "Original:" << endl;
-	for (int col = 1; col < 4; ++col)
-	{
-		for (int row = 1; row < 4; ++row)
-		{
-			cout << TestTest1.mm[col - 1][row - 1] << ",";
-			if (row % 3 == 0) cout << endl;
-		}
-	}
-	cout << endl;
-
-	cout << "Add:" << endl;
-	Matrix3x3 poop1 = TestTest1.GetInverse();
-	for (int col = 1; col < 4; ++col)
-	{
-		for (int row = 1; row < 4; ++row)
-		{
-			cout << poop1.mm[col - 1][row - 1] << ",";
-			if (row % 3 == 0) cout << endl;
-		}
-	}
-	cout << endl;
-
-	cout << "Added:" << endl;
-	TestTest1.Inverse();
-	for (int col = 1; col < 4; ++col)
-	{
-		for (int row = 1; row < 4; ++row)
-		{
-			cout << TestTest1.mm[col - 1][row - 1] << ",";
-			if (row % 3 == 0) cout << endl;
-		}
-	}
-	cout << endl;
-
 	while (sfw::stepContext())
 	{
-
 		if (sfw::getKey('S')) rigidbody1.AddForce(-transform1.GetUp() * speed);
 		if (sfw::getKey('W')) rigidbody1.AddForce(transform1.GetUp() * speed);
 		if (sfw::getKey('A')) rigidbody1.AddForce(-transform1.GetRight() * speed);
@@ -150,7 +107,7 @@ int main()
 	sfw::termContext();
 
 	return 0;
-}
+}*/
 
 /*int main()
 {
@@ -168,33 +125,33 @@ int main()
 	return 0;
 }*/
 
-/*#include "Window.h"
-//#include "Input.h"
-//#include "Time.h"
+#include "Window.h"
+#include "Input.h"
+#include "Time.h"
 #include <iostream>
 //#include "Factory.h"
 //#include "DebugDraw.h"
 //#include "RigidbodyDynamics.h"
-//#include "LifetimeSystem.h"
+#include "LifetimeSystem.h"
 
 //#include "CollisionDetection.h"
 //#include "DynamicResolution.h"
 
 //#include "PlayerFlightSystem.h"
 //#include "RenderSystem.h"
-//#include "Assets.h"
+#include "Assets.h"
 
 void main()
 {
 	auto &window = Window::instance();
-	//auto &input = Input::instance();
-	//auto &time = Time::instance();
+	auto &input = Input::instance();
+	auto &time = Time::instance();
 
 	window.init();
-	//input.init();
-	//time.init();
+	input.init();
+	time.init();
 
-	//Asset::instance().loadTexture("Ship", "../textures/spaceship.png");
+	Asset::instance().loadTexture("Ship", "./Textures/sword.png");
 
 	///Factory::makeBall({ 40,  40 },  {10,10},  400,  40)->rigidbody->addTorque(1000);
 	///        Factory::makeBall({ 80,  200 },  { 100,0}, 120, 120);
@@ -206,7 +163,7 @@ void main()
 
 	//DebugDraw debugDraw;
 	//RigidbodyDynamics rigidbodies;
-	//LifetimeSystem lifetimes;
+	LifetimeSystem lifetimes;
 	//CollisionDetection collisioner;
 	//DynamicResolution dynamic;
 	//PlayerFlightSystem flightsystem;
@@ -214,15 +171,15 @@ void main()
 
 	while (window.step())
 	{
-		//input.step();
-		//time.step();
+		input.step();
+		time.step();
 
 
 		//flightsystem.step();
 
 
 		//rigidbodies.step();
-		//lifetimes.step();
+		lifetimes.step();
 
 		//collisioner.step();
 		//dynamic.step();
@@ -230,7 +187,7 @@ void main()
 		//debugDraw.step();
 	}
 
-	//time.term();
-	//input.term();
+	time.term();
+	input.term();
 	window.term();
-}*/
+}

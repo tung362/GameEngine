@@ -1,11 +1,11 @@
-/*#include "sfwdraw.h"
+#include "sfwdraw.h"
 #include "crenderutils.h"
 
-void drawMatrix(const Matrix3x3 &a)
+/*void drawMatrix(const Matrix3x3 &a)
 {
-    Vector2 &pos  =       a[2].xy;
-    Vector2 up    = pos + a[1].xy;
-    Vector2 right = pos + a[0].xy;
+    Vector2 &pos  =       a[2].GetXY();
+    Vector2 up    = pos + a[1].GetXY();
+    Vector2 right = pos + a[0].GetXY();
 
     sfw::drawLine(pos.x, pos.y, right.x, right.y, RED);
     sfw::drawLine(pos.x, pos.y, up.x   , up.y   , GREEN);
@@ -47,5 +47,4 @@ void drawCollider(const Transform &t, const Collider  &c)
 void drawCircle(const Circle    &t, unsigned TINT)
 {
     sfw::drawCircle(t.position.x, t.position.y, t.radius, 6, TINT);
-}
-*/
+}*/

@@ -70,6 +70,11 @@ Vector3 Vector3::SetAngle(float angle)
 	return Vector3(cosf(angle), sinf(angle), 0);
 }
 
+Vector2 Vector3::GetXY()
+{
+	return Vector2(x, y);
+}
+
 void Vector3::operator=(Vector3 otherVec)
 {
 	x = otherVec.x;

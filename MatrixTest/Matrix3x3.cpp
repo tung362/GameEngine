@@ -100,7 +100,9 @@ Matrix3x3 Matrix3x3::GetTranspose() const
 
 float Matrix3x3::Determinant()
 {
-	return mm[1 - 1][1 - 1] * mm[2 - 1][2 - 1] * mm[3 - 1][3 - 1] + mm[2 - 1][1 - 1] * mm[3 - 1][2 - 1] * mm[1 - 1][3 - 1] + mm[3 - 1][1 - 1] * mm[1 - 1][2 - 1] * mm[2 - 1][3 - 1] - mm[1 - 1][1 - 1] * mm[3 - 1][2 - 1] * mm[2 - 1][3 - 1] - mm[3 - 1][1 - 1] * mm[2 - 1][2 - 1] * mm[1 - 1][3 - 1] - mm[2 - 1][1 - 1] * mm[1 - 1][2 - 1] * mm[3 - 1][3 - 1];
+	return mm[0][0] * (mm[1][1] * mm[2][2] - mm[1][2] * mm[2][1])
+		 - mm[0][1] * (mm[1][0] * mm[2][2] - mm[1][2] * mm[2][0])
+		 + mm[0][2] * (mm[1][0] * mm[2][1] - mm[1][1] * mm[2][0]);
 }
 
 void Matrix3x3::Inverse()
@@ -110,15 +112,15 @@ void Matrix3x3::Inverse()
 	Matrix3x3 inverse;
 	if (oldDeterminate != 0)
 	{
-		inverse.mm[0][0] = mm[2 - 1][2 - 1] * mm[3 - 1][3 - 1] - mm[2 - 1][3 - 1] * mm[3 - 1][2 - 1] / Determinant();
-		inverse.mm[0][1] = mm[1 - 1][3 - 1] * mm[3 - 1][2 - 1] - mm[1 - 1][2 - 1] * mm[3 - 1][3 - 1] / Determinant();
-		inverse.mm[0][2] = mm[1 - 1][2 - 1] * mm[2 - 1][3 - 1] - mm[1 - 1][3 - 1] * mm[2 - 1][2 - 1] / Determinant();
-		inverse.mm[1][0] = mm[2 - 1][3 - 1] * mm[3 - 1][1 - 1] - mm[2 - 1][1 - 1] * mm[3 - 1][3 - 1] / Determinant();
-		inverse.mm[1][1] = mm[1 - 1][1 - 1] * mm[3 - 1][3 - 1] - mm[1 - 1][3 - 1] * mm[3 - 1][1 - 1] / Determinant();
-		inverse.mm[1][2] = mm[1 - 1][3 - 1] * mm[2 - 1][1 - 1] - mm[1 - 1][1 - 1] * mm[2 - 1][3 - 1] / Determinant();
-		inverse.mm[2][0] = mm[2 - 1][1 - 1] * mm[3 - 1][2 - 1] - mm[2 - 1][2 - 1] * mm[3 - 1][1 - 1] / Determinant();
-		inverse.mm[2][1] = mm[1 - 1][2 - 1] * mm[3 - 1][1 - 1] - mm[1 - 1][1 - 1] * mm[3 - 1][2 - 1] / Determinant();
-		inverse.mm[2][2] = mm[1 - 1][1 - 1] * mm[2 - 1][2 - 1] - mm[1 - 1][2 - 1] * mm[2 - 1][1 - 1] / Determinant();
+		inverse.mm[0][0] = (mm[2 - 1][2 - 1] * mm[3 - 1][3 - 1] - mm[2 - 1][3 - 1] * mm[3 - 1][2 - 1]) / oldDeterminate;
+		inverse.mm[0][1] = (mm[1 - 1][3 - 1] * mm[3 - 1][2 - 1] - mm[1 - 1][2 - 1] * mm[3 - 1][3 - 1]) / oldDeterminate;
+		inverse.mm[0][2] = (mm[1 - 1][2 - 1] * mm[2 - 1][3 - 1] - mm[1 - 1][3 - 1] * mm[2 - 1][2 - 1]) / oldDeterminate;
+		inverse.mm[1][0] = (mm[2 - 1][3 - 1] * mm[3 - 1][1 - 1] - mm[2 - 1][1 - 1] * mm[3 - 1][3 - 1]) / oldDeterminate;
+		inverse.mm[1][1] = (mm[1 - 1][1 - 1] * mm[3 - 1][3 - 1] - mm[1 - 1][3 - 1] * mm[3 - 1][1 - 1]) / oldDeterminate;
+		inverse.mm[1][2] = (mm[1 - 1][3 - 1] * mm[2 - 1][1 - 1] - mm[1 - 1][1 - 1] * mm[2 - 1][3 - 1]) / oldDeterminate;
+		inverse.mm[2][0] = (mm[2 - 1][1 - 1] * mm[3 - 1][2 - 1] - mm[2 - 1][2 - 1] * mm[3 - 1][1 - 1]) / oldDeterminate;
+		inverse.mm[2][1] = (mm[1 - 1][2 - 1] * mm[3 - 1][1 - 1] - mm[1 - 1][1 - 1] * mm[3 - 1][2 - 1]) / oldDeterminate;
+		inverse.mm[2][2] = (mm[1 - 1][1 - 1] * mm[2 - 1][2 - 1] - mm[1 - 1][2 - 1] * mm[2 - 1][1 - 1]) / oldDeterminate;
 	}
 
 	for (int col = 0; col < 3; ++col)
@@ -134,17 +136,22 @@ Matrix3x3 Matrix3x3::GetInverse()
 	cout << oldDeterminate << endl;
 	if (oldDeterminate != 0)
 	{
-		inverse.mm[0][0] = mm[2 - 1][2 - 1] * mm[3 - 1][3 - 1] - mm[2 - 1][3 - 1] * mm[3 - 1][2 - 1] / Determinant();
-		inverse.mm[0][1] = mm[1 - 1][3 - 1] * mm[3 - 1][2 - 1] - mm[1 - 1][2 - 1] * mm[3 - 1][3 - 1] / Determinant();
-		inverse.mm[0][2] = mm[1 - 1][2 - 1] * mm[2 - 1][3 - 1] - mm[1 - 1][3 - 1] * mm[2 - 1][2 - 1] / Determinant();
-		inverse.mm[1][0] = mm[2 - 1][3 - 1] * mm[3 - 1][1 - 1] - mm[2 - 1][1 - 1] * mm[3 - 1][3 - 1] / Determinant();
-		inverse.mm[1][1] = mm[1 - 1][1 - 1] * mm[3 - 1][3 - 1] - mm[1 - 1][3 - 1] * mm[3 - 1][1 - 1] / Determinant();
-		inverse.mm[1][2] = mm[1 - 1][3 - 1] * mm[2 - 1][1 - 1] - mm[1 - 1][1 - 1] * mm[2 - 1][3 - 1] / Determinant();
-		inverse.mm[2][0] = mm[2 - 1][1 - 1] * mm[3 - 1][2 - 1] - mm[2 - 1][2 - 1] * mm[3 - 1][1 - 1] / Determinant();
-		inverse.mm[2][1] = mm[1 - 1][2 - 1] * mm[3 - 1][1 - 1] - mm[1 - 1][1 - 1] * mm[3 - 1][2 - 1] / Determinant();
-		inverse.mm[2][2] = mm[1 - 1][1 - 1] * mm[2 - 1][2 - 1] - mm[1 - 1][2 - 1] * mm[2 - 1][1 - 1] / Determinant();
+		inverse.mm[0][0] = (mm[2 - 1][2 - 1] * mm[3 - 1][3 - 1] - mm[2 - 1][3 - 1] * mm[3 - 1][2 - 1]) / oldDeterminate;
+		inverse.mm[0][1] = (mm[1 - 1][3 - 1] * mm[3 - 1][2 - 1] - mm[1 - 1][2 - 1] * mm[3 - 1][3 - 1]) / oldDeterminate;
+		inverse.mm[0][2] = (mm[1 - 1][2 - 1] * mm[2 - 1][3 - 1] - mm[1 - 1][3 - 1] * mm[2 - 1][2 - 1]) / oldDeterminate;
+		inverse.mm[1][0] = (mm[2 - 1][3 - 1] * mm[3 - 1][1 - 1] - mm[2 - 1][1 - 1] * mm[3 - 1][3 - 1]) / oldDeterminate;
+		inverse.mm[1][1] = (mm[1 - 1][1 - 1] * mm[3 - 1][3 - 1] - mm[1 - 1][3 - 1] * mm[3 - 1][1 - 1]) / oldDeterminate;
+		inverse.mm[1][2] = (mm[1 - 1][3 - 1] * mm[2 - 1][1 - 1] - mm[1 - 1][1 - 1] * mm[2 - 1][3 - 1]) / oldDeterminate;
+		inverse.mm[2][0] = (mm[2 - 1][1 - 1] * mm[3 - 1][2 - 1] - mm[2 - 1][2 - 1] * mm[3 - 1][1 - 1]) / oldDeterminate;
+		inverse.mm[2][1] = (mm[1 - 1][2 - 1] * mm[3 - 1][1 - 1] - mm[1 - 1][1 - 1] * mm[3 - 1][2 - 1]) / oldDeterminate;
+		inverse.mm[2][2] = (mm[1 - 1][1 - 1] * mm[2 - 1][2 - 1] - mm[1 - 1][2 - 1] * mm[2 - 1][1 - 1]) / oldDeterminate;
 	}
 	return inverse;
+}
+
+Vector2 Matrix3x3::GetXY()
+{
+	return Vector2(mm[0][2], mm[1][2]);
 }
 
 Matrix3x3 Matrix3x3::operator+(const Matrix3x3 & otherMatrix) const

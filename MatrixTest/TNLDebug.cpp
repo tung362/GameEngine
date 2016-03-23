@@ -118,6 +118,30 @@ void DebugMatrix3x3()
 		}
 	}
 	cout << endl;
+
+	cout << "Inverse:" << endl;
+	Matrix3x3 poop1 = TestTest1.GetInverse();
+	for (int col = 1; col < 4; ++col)
+	{
+		for (int row = 1; row < 4; ++row)
+		{
+			cout << poop1.mm[col - 1][row - 1] << ",";
+			if (row % 3 == 0) cout << endl;
+		}
+	}
+	cout << endl;
+
+	cout << "Inversed:" << endl;
+	TestTest1.Inverse();
+	for (int col = 1; col < 4; ++col)
+	{
+		for (int row = 1; row < 4; ++row)
+		{
+			cout << TestTest1.mm[col - 1][row - 1] << ",";
+			if (row % 3 == 0) cout << endl;
+		}
+	}
+	cout << endl;
 }
 
 void DebugMatrix4x4()

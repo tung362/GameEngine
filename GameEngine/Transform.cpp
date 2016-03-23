@@ -28,6 +28,12 @@ Matrix3x3 Transform::GetGlobalTransform() const
 		* Matrix3x3::Translate(position) 
 	* (parent ? parent->GetGlobalTransform() 
 		: Matrix3x3::Identity());
+
+	/*(parent ? parent->GetGlobalTransform()
+		: Matrix3x3::Identity())
+		* Matrix3x3::Translate(position)
+		* Matrix3x3::Scale(Scale)
+		* Matrix3x3::Rotate(angle);*/
 }
 
 void Transform::SetParent(Transform * newParent)

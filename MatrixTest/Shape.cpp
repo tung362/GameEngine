@@ -7,8 +7,8 @@
 	Vector2 omin = a.Min();
 	Vector2 omax = a.Max();
 
-	Vector2 rmin = m[2].xy;
-	Vector2 rmax = m[2].xy;
+	Vector2 rmin = m[2].GetXY();
+	Vector2 rmax = m[2].GetXY();
 
 	float p, q;
 
@@ -29,12 +29,12 @@
 Circle operator*(Matrix3x3 &m, Circle &a)
 {
 	Circle ret;
-	ret.position = (m * Vector3(a.position.x, a.position.y, 1)).xy;
+	ret.position = (m * Vector3(a.position.x, a.position.y, 1)).GetXY();
 
 	Vector3 xrad(a.radius, 0, 0);
 	Vector3 yrad(0, a.radius, 0);
 
-	ret.radius = fmaxf((m*xrad).magnitude(), (m*yrad).magnitude());
+	ret.radius = fmaxf((m*xrad).Magnitude(), (m*yrad).Magnitude());
 
 	return ret;
 }
@@ -45,7 +45,7 @@ Ray operator*(Matrix3x3 &m, Ray &a)
 	Vector3 dir = Vector3(a.direction.x, a.direction.y, 0) * a.length;
 	Vector3 pos(a.position.x, a.position.y, 1);
 
-	return{ (m * pos).xy, normal((m * dir).xy), dir.magnitude() };
+	return{ (m * pos).GetXY(), Perp((m * dir).GetXY()), dir.Magnitude() };
 }
 
 Plane operator*(Matrix3x3 &m, Plane &a)
@@ -53,14 +53,14 @@ Plane operator*(Matrix3x3 &m, Plane &a)
 	Vector3 nor(a.normal.x, a.normal.y, 0);
 	Vector3 pos(a.position.x, a.position.y, 1);
 
-	return{ (m * pos).xy,(m * nor).xy };
+	return{ (m * pos).GetXY(),(m * nor).GetXY() };
 }
 
 ConvexHull operator*(Matrix3x3 &m, ConvexHull &a)
 {
 	ConvexHull ret;
 	for each(Vector2 p in ret.verts)
-		ret.verts.push_back((m * Vector3(p.x, p.y, 1)).xy);
+		ret.verts.push_back((m * Vector3(p.x, p.y, 1)).GetXY());
 
 	return ret;
 }*/

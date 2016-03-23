@@ -122,7 +122,6 @@
     <ClCompile Include="AABB.cpp" />
     <ClCompile Include="Circle.cpp" />
     <ClCompile Include="Collision.cpp" />
-    <ClCompile Include="Comments.cpp" />
     <ClCompile Include="Matrix3x3.cpp" />
     <ClCompile Include="Matrix4x4.cpp" />
     <ClCompile Include="Plane.cpp" />

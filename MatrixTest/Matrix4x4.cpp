@@ -163,6 +163,11 @@ Matrix4x4 Matrix4x4::GetInverse()
 	return inverse;
 }
 
+Vector2 Matrix4x4::GetXY()
+{
+	return Vector2(mm[0][3], mm[1][3]);
+}
+
 Matrix4x4 Matrix4x4::operator+(const Matrix4x4 & otherMatrix) const
 {
 	Matrix4x4 temp;

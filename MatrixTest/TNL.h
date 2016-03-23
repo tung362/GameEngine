@@ -14,41 +14,6 @@ struct Plane;
 struct Ray;
 
 /*Math Stuff*/
-struct Vector3
-{
-public:
-	float x;
-	float y;
-	float z;
-	Vector3();
-	Vector3(float x1, float y1, float z1);
-	float Magnitude();
-	void Normalize();
-	Vector3 Normal();
-	Vector3 CrossProduct(Vector3 b);
-	Vector3 Perp();
-	Vector3 Reflect(Vector3 normal);
-	float GetAngle2D();
-	static Vector3 SetAngle(float angle);
-
-	void operator=(Vector3 otherVec);
-	Vector3 operator+(Vector3 otherVec);
-	Vector3 operator-(Vector3 otherVec);
-	Vector3 operator*(Vector3 otherVec);
-	Vector3 operator/(Vector3 otherVec);
-	Vector3 operator*(float otherNum);
-	Vector3 operator/(float otherNum);
-	void operator+=(Vector3 otherVec);
-	void operator-=(Vector3 otherVec);
-	void operator*=(Vector3 otherVec);
-	void operator/=(Vector3 otherVec);
-	bool operator==(Vector3 otherVec);
-	bool operator!=(Vector3 otherVec);
-};
-Vector3 operator*(float otherNum, Vector3 vec);
-Vector3 operator-(Vector3 vec);
-void operator*=(float otherNum, Vector3 vec);
-
 struct Vector2
 {
 public:
@@ -82,6 +47,42 @@ Vector2 operator*(float otherNum, Vector2 vec);
 Vector2 operator-(Vector2 vec);
 void operator*=(float otherNum, Vector2 vec);
 
+struct Vector3
+{
+public:
+	float x;
+	float y;
+	float z;
+	Vector3();
+	Vector3(float x1, float y1, float z1);
+	float Magnitude();
+	void Normalize();
+	Vector3 Normal();
+	Vector3 CrossProduct(Vector3 b);
+	Vector3 Perp();
+	Vector3 Reflect(Vector3 normal);
+	float GetAngle2D();
+	static Vector3 SetAngle(float angle);
+	Vector2 GetXY();
+
+	void operator=(Vector3 otherVec);
+	Vector3 operator+(Vector3 otherVec);
+	Vector3 operator-(Vector3 otherVec);
+	Vector3 operator*(Vector3 otherVec);
+	Vector3 operator/(Vector3 otherVec);
+	Vector3 operator*(float otherNum);
+	Vector3 operator/(float otherNum);
+	void operator+=(Vector3 otherVec);
+	void operator-=(Vector3 otherVec);
+	void operator*=(Vector3 otherVec);
+	void operator/=(Vector3 otherVec);
+	bool operator==(Vector3 otherVec);
+	bool operator!=(Vector3 otherVec);
+};
+Vector3 operator*(float otherNum, Vector3 vec);
+Vector3 operator-(Vector3 vec);
+void operator*=(float otherNum, Vector3 vec);
+
 struct Matrix3x3
 {
 public:
@@ -91,6 +92,9 @@ public:
 		float   mm[3][3];
 		Vector3 c[3];
 	};
+
+	Vector3  operator[](unsigned idx) const { return c[idx]; }
+	Vector3 &operator[](unsigned idx) { return c[idx]; }
 
 	Matrix3x3();
 	Matrix3x3(float r0c0, float r1c0, float r2c0,
@@ -106,6 +110,7 @@ public:
 	float Determinant();
 	void Inverse();
 	Matrix3x3 GetInverse();
+	Vector2 GetXY();
 
 	Matrix3x3 operator +(const Matrix3x3& otherMatrix) const;
 	Matrix3x3 operator -(const Matrix3x3& otherMatrix) const;
@@ -142,6 +147,7 @@ public:
 	float Determinant();
 	void Inverse();
 	Matrix4x4 GetInverse();
+	Vector2 GetXY();
 
 	Matrix4x4 operator +(const Matrix4x4& otherMatrix) const;
 	Matrix4x4 operator -(const Matrix4x4& otherMatrix) const;
