@@ -1,26 +1,49 @@
-/*#include <iostream>
-#include <cstring>
 #include "Window.h"
+#include "Input.h"
+#include "Time.h"
+#include <iostream>
+#include "Factory.h"
+//#include "DebugDraw.h"
+//#include "RigidbodyDynamics.h"
+#include "LifetimeSystem.h"
+
+//#include "CollisionDetection.h"
+//#include "DynamicResolution.h"
+
+//#include "PlayerFlightSystem.h"
+//#include "RenderSystem.h"
+#include "Assets.h"
 #include "sfwdraw.h"
-#include "MatrixTest\TNL.h"
-//#include "GameObject.h"
 #include "GameFunction.h"
-#include "Transform.h"
-#include "Rigidbody.h"
-//#include "Entity.h"
-//#include "Vector2.h"
-//#include "GLobalData.h"
-#include <ctime>
-#include <fstream>
-#include <vector>
 
-using namespace sfw;
-using std::cout;
-using std::endl;
-
-int main()
+void main()
 {
-	sfw::initContext();
+	auto &window = Window::instance();
+	auto &input = Input::instance();
+	auto &time = Time::instance();
+
+	window.init();
+	input.init();
+	time.init();
+
+	Asset::instance().loadTexture("Ship", "./Textures/sword.png");
+
+	///Factory::makeBall({ 40,  40 },  {10,10},  400,  40)->rigidbody->addTorque(1000);
+	///        Factory::makeBall({ 80,  200 },  { 100,0}, 120, 120);
+	///auto e = Factory::makeBall({ 720, 200 }, { }, 60, 1);
+
+	//Factory::makePlayer({ 0,0 });
+
+
+
+	//DebugDraw debugDraw;
+	//RigidbodyDynamics rigidbodies;
+	LifetimeSystem lifetimes;
+	//CollisionDetection collisioner;
+	//DynamicResolution dynamic;
+	//PlayerFlightSystem flightsystem;
+	//RenderSystem render;
+
 	int  handle = sfw::loadTextureMap("./Textures/sword.png");
 
 	float x = 400, y = 400;
@@ -67,23 +90,38 @@ int main()
 
 	Matrix3x3 mat;
 
-	while (sfw::stepContext())
+	while (window.step())
 	{
-		if (sfw::getKey('S')) rigidbody1.AddForce(-transform1.GetUp() * speed);
-		if (sfw::getKey('W')) rigidbody1.AddForce(transform1.GetUp() * speed);
-		if (sfw::getKey('A')) rigidbody1.AddForce(-transform1.GetRight() * speed);
-		if (sfw::getKey('D')) rigidbody1.AddForce(transform1.GetRight() * speed);
-		if (sfw::getKey(' ')) rigidbody1.velocity = Vector2(rigidbody1.velocity.x, 100);
-		if (sfw::getKey('Q')) angle += sfw::getDeltaTime() * angularSpeed;
-		if (sfw::getKey('E')) angle -= sfw::getDeltaTime() * angularSpeed;
+		input.step();
+		time.step();
+
+
+		//flightsystem.step();
+
+
+		//rigidbodies.step();
+		lifetimes.step();
+
+		//collisioner.step();
+		//dynamic.step();
+		//render.step();
+		//debugDraw.step();
+
+		if (input.getKey('S')) rigidbody1.AddForce(-transform1.GetUp() * speed);
+		if (input.getKey('W')) rigidbody1.AddForce(transform1.GetUp() * speed);
+		if (input.getKey('A')) rigidbody1.AddForce(-transform1.GetRight() * speed);
+		if (input.getKey('D')) rigidbody1.AddForce(transform1.GetRight() * speed);
+		if (input.getKey(' ')) rigidbody1.velocity = Vector2(rigidbody1.velocity.x, 100);
+		if (input.getKey('Q')) angle += time.getDeltaTime() * angularSpeed;
+		if (input.getKey('E')) angle -= time.getDeltaTime() * angularSpeed;
 
 		transform1.SetAngle(angle);
 		transform1.SetScale(Vector2(200, 200));
 
-		rigidbody1.Integrate(&transform1, getDeltaTime());
+		rigidbody1.Integrate(&transform1, time.getDeltaTime());
 
 		orbitalSpinner.SetParent(&transform1);
-		orbitalSpinner.SetAngle(-sfw::getTime());
+		orbitalSpinner.SetAngle(time.getTotalTime());
 
 		transform2.SetParent(&orbitalSpinner);
 		transform2.SetPosition(Vector2(.25f, .25f));
@@ -103,88 +141,6 @@ int main()
 		//RayPlaneTest(aray, aplane, speed);
 		//RayCircleTest(aray, acicle2, speed);
 		//RayCircleTest(aray, abox, speed);
-	}
-	sfw::termContext();
-
-	return 0;
-}*/
-
-/*int main()
-{
-	auto &window = Window::Instance();
-
-	window.Init(600, 800, "Game Engine");
-
-	while (window.Step())
-	{
-
-	}
-
-	//window.Term();
-
-	return 0;
-}*/
-
-#include "Window.h"
-#include "Input.h"
-#include "Time.h"
-#include <iostream>
-//#include "Factory.h"
-//#include "DebugDraw.h"
-//#include "RigidbodyDynamics.h"
-#include "LifetimeSystem.h"
-
-//#include "CollisionDetection.h"
-//#include "DynamicResolution.h"
-
-//#include "PlayerFlightSystem.h"
-//#include "RenderSystem.h"
-#include "Assets.h"
-
-void main()
-{
-	auto &window = Window::instance();
-	auto &input = Input::instance();
-	auto &time = Time::instance();
-
-	window.init();
-	input.init();
-	time.init();
-
-	Asset::instance().loadTexture("Ship", "./Textures/sword.png");
-
-	///Factory::makeBall({ 40,  40 },  {10,10},  400,  40)->rigidbody->addTorque(1000);
-	///        Factory::makeBall({ 80,  200 },  { 100,0}, 120, 120);
-	///auto e = Factory::makeBall({ 720, 200 }, { }, 60, 1);
-
-	//Factory::makePlayer({ 0,0 });
-
-
-
-	//DebugDraw debugDraw;
-	//RigidbodyDynamics rigidbodies;
-	LifetimeSystem lifetimes;
-	//CollisionDetection collisioner;
-	//DynamicResolution dynamic;
-	//PlayerFlightSystem flightsystem;
-	//RenderSystem render;
-
-	while (window.step())
-	{
-		input.step();
-		time.step();
-
-
-		//flightsystem.step();
-
-
-		//rigidbodies.step();
-		lifetimes.step();
-
-		//collisioner.step();
-		//dynamic.step();
-		//render.step();
-		//debugDraw.step();
 	}
 
 	time.term();
